@@ -247,17 +247,62 @@
 //     }
 //     console.log(row)
 // }
-//problem 5 
-for (let i = 4; i > 0; i--) {
-    let row3 = ""
-    let m=0;
-    for (let j = 0; j < i-1; j++) {
-        row3 = row3 + " "
-        m++;
-    }
-      while(m<4){
-        row3=row3+"*";
-        m++;
-      }
-      console.log(row3)
-    }
+// //problem 5 
+// for (let i = 4; i > 0; i--) {
+//     let row3 = ""
+//     let m=0;
+//     for (let j = 0; j < i-1; j++) {
+//         row3 = row3 + " "
+//         m++;
+//     }
+//       while(m<4){
+//         row3=row3+"*";
+//         m++;
+//       }
+//       console.log(row3)
+//     }
+
+// //problem 6
+// for(let i=1; i<=5; i++){
+//   let m=1;
+//   for(let j=0;j<i;j++){
+//    process.stdout.write(m.toString());
+//     m++;
+//   }
+//   console.log("")
+// }
+// //problem 7
+// for(let i=5; i>0; i--){
+//   let m=1;
+//   for(let j=i;j>0;j--){
+//    process.stdout.write(m.toString());
+//     m++;
+//   }
+//   console.log("")
+// }
+
+//problem 8
+let problem8=1;
+for(let i=1; i<=5; i++){
+  for(let j=0;j<i;j++){
+   process.stdout.write(problem8.toString());
+   problem8++;
+  }
+  console.log("")
+}
+//problem 9
+for(let i=1; i<=5; i++){
+  let row="";
+  for(let j=0;j<i;j++){
+     if((j+i)%2==0){
+      row=row+"0";
+     }        
+     else{
+      row=row+"1";
+     }
+  }
+  console.log(row)
+}
+
+
+    
