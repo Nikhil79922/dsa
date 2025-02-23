@@ -1,6 +1,6 @@
 const binary_search = (arr, target) => {
     var start = 0
-    var end = arr.length
+    var end = arr.length-1
     while (start <= end) {
         var mid = Math.floor((start + end) / 2)
         if (arr[mid] == target) return mid
