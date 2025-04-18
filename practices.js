@@ -280,23 +280,32 @@ let arr_Bubble = [29, 10, 14, 37, 14]
 bubble(arr_Bubble);
 
 //Selection Sort
-function selection(arr) {
-    let n = arr.length;
-    let min;
-    let index;
-    for (let i = 0; i < n; i++) {
-        min = arr[i]
-        for (let j = i; j < n - i; j++) {
-            if (min > arr[j]) {
-                index = arr.indexOf(min);
+
+    function selection(arr) {
+        let min;
+        let index;
+        for (let i = 0; i < arr.length; i++) {
+
+            min = arr[i];
+            if(i==5){
+
             }
-        }
-        [arr[i], arr[index]] = [arr[index], arr[i]];
+            for (let j = i; j < arr.length; j++) {
+                    if (min > arr[j]) {
+                        min = arr[j]
+                        index = j
+                    }
+            }
+console.log("i---->",i, "--index------>",index)
+            if (arr[i]>=arr[index]){
+
+                [arr[i], arr[index]] = [arr[index], arr[i]];
+            }
     }
     console.log("Selection Sort:", arr)
 }
 
-let arr_selection = [29, 10, 14, 37, 14]
+let arr_selection = [-4,0,7,4,9,-5,-1,0,-7,-1]
 selection(arr_selection);
 
 //Insertion Sort
@@ -316,3 +325,18 @@ function insertion(arr) {
 
 let arr_insertion = [29, 10, 14, 37, 14]
 insertion(arr_insertion);
+
+//two sum
+function two_sum(nums, target) {
+    for(let i=0;i<nums.length;i++){
+        for (let j=i+1;j<nums.length;j++){
+            if((nums[i]+nums[j])==target){
+                let result=[i,j];
+                return console.log(result)
+            }
+        }
+    }
+};
+
+let arr_two_sum = [2,5,5,11]
+two_sum(arr_two_sum,10)
