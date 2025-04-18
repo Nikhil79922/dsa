@@ -280,31 +280,25 @@ let arr_Bubble = [29, 10, 14, 37, 14]
 bubble(arr_Bubble);
 
 //Selection Sort
-
     function selection(arr) {
         let min;
         let index;
         for (let i = 0; i < arr.length; i++) {
-
+            let val=false
             min = arr[i];
-            if(i==5){
-
-            }
             for (let j = i; j < arr.length; j++) {
                     if (min > arr[j]) {
                         min = arr[j]
                         index = j
+                        val=true;
                     }
             }
-console.log("i---->",i, "--index------>",index)
-            if (arr[i]>=arr[index]){
-
+            if (arr[i]>=arr[index]&&val){
                 [arr[i], arr[index]] = [arr[index], arr[i]];
             }
     }
     console.log("Selection Sort:", arr)
 }
-
 let arr_selection = [-4,0,7,4,9,-5,-1,0,-7,-1]
 selection(arr_selection);
 
@@ -340,3 +334,21 @@ function two_sum(nums, target) {
 
 let arr_two_sum = [2,5,5,11]
 two_sum(arr_two_sum,10)
+
+function selection2(arr) {
+    let min;
+    for (let i = 0; i < arr.length-1; i++) {
+        min = i;
+        for (let j = i+1; j < arr.length; j++) {
+                if (arr[min] > arr[j]) {
+             min=j
+                }
+        }
+        if (min!==i){
+            [arr[i], arr[min]] = [arr[min], arr[i]];
+        }
+}
+console.log("Selection Sort2:", arr)
+}
+let arr_selection2 = [-4,0,7,4,9,-5,-1,0,-7,-1]
+selection2(arr_selection2);
