@@ -288,7 +288,6 @@ function selection(arr) {
         min = arr[i]
         for (let j = i; j < n - i; j++) {
             if (min > arr[j]) {
-                console.log("min",min)
                 index = arr.indexOf(min);
             }
         }
@@ -301,7 +300,19 @@ let arr_selection = [29, 10, 14, 37, 14]
 selection(arr_selection);
 
 //Insertion Sort
-function insertion(arr){
-    let n=arr.length;
-    for(let i=)
+function insertion(arr) {
+    let n = arr.length;
+    for (let i = 1; i < n; i++) {
+        let sorted = arr[i]
+        let j = i - 1;
+        while (j >= 0 && arr[j] > sorted) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = sorted
+    }
+    console.log("Insertion Sort", arr)
 }
+
+let arr_insertion = [29, 10, 14, 37, 14]
+insertion(arr_insertion);
