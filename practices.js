@@ -301,4 +301,7 @@ let arr_selection = [29, 10, 14, 37, 14]
 selection(arr_selection);
 
 //Insertion Sort
-
+function insertion(arr){
+    let n=arr.length;
+    for(let i=)
+}
