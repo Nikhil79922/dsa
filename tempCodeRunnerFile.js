@@ -1,1 +1,1 @@
-           console.log("initial",min)
+    console.log(resultArr)
