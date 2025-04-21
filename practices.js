@@ -264,118 +264,118 @@ console.log(car)
 // console.log(index);  // Output: 4 (the index of element 8)
 
 
-// //Bubble Sort 
-// function bubble(arr) {
-//     let n = arr.length;
-//     for (let i = 0; i < n; i++) {
-//         for (let j = 0; j < n - i - 1; j++) {
-//             if (arr[j] > arr[j + 1]) {
-//                 [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-//             }
-//         }
-//     }
-//     console.log("Bubble Sort:", arr)
-// }
-// let arr_Bubble = [29, 10, 14, 37, 14]
-// bubble(arr_Bubble);
+//Bubble Sort 
+function bubble(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+    }
+    console.log("Bubble Sort:", arr)
+}
+let arr_Bubble = [29, 10, 14, 37, 14]
+bubble(arr_Bubble);
 
-// //Selection Sort
-//     function selection(arr) {
-//         let min;
-//         let index;
-//         for (let i = 0; i < arr.length; i++) {
-//             let val=false
-//             min = arr[i];
-//             for (let j = i; j < arr.length; j++) {
-//                     if (min > arr[j]) {
-//                         min = arr[j]
-//                         index = j
-//                         val=true;
-//                     }
-//             }
-//             if (arr[i]>=arr[index]&&val){
-//                 [arr[i], arr[index]] = [arr[index], arr[i]];
-//             }
-//     }
-//     console.log("Selection Sort:", arr)
-// }
-// let arr_selection = [-4,0,7,4,9,-5,-1,0,-7,-1]
-// selection(arr_selection);
+//Selection Sort
+    function selection(arr) {
+        let min;
+        let index;
+        for (let i = 0; i < arr.length; i++) {
+            let val=false
+            min = arr[i];
+            for (let j = i; j < arr.length; j++) {
+                    if (min > arr[j]) {
+                        min = arr[j]
+                        index = j
+                        val=true;
+                    }
+            }
+            if (arr[i]>=arr[index]&&val){
+                [arr[i], arr[index]] = [arr[index], arr[i]];
+            }
+    }
+    console.log("Selection Sort:", arr)
+}
+let arr_selection = [-4,0,7,4,9,-5,-1,0,-7,-1]
+selection(arr_selection);
 
-// //Insertion Sort
-// function insertion(arr) {
-//     let n = arr.length;
-//     for (let i = 1; i < n; i++) {
-//         let sorted = arr[i]
-//         let j = i - 1;
-//         while (j >= 0 && arr[j] > sorted) {
-//             arr[j + 1] = arr[j];
-//             j--;
-//         }
-//         arr[j + 1] = sorted
-//     }
-//     console.log("Insertion Sort", arr)
-// }
+//Insertion Sort
+function insertion(arr) {
+    let n = arr.length;
+    for (let i = 1; i < n; i++) {
+        let sorted = arr[i]
+        let j = i - 1;
+        while (j >= 0 && arr[j] > sorted) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = sorted
+    }
+    console.log("Insertion Sort", arr)
+}
 
-// let arr_insertion = [29, 10, 14, 37, 14]
-// insertion(arr_insertion);
+let arr_insertion = [29, 10, 14, 37, 14]
+insertion(arr_insertion);
 
-// //two sum
-// function two_sum(nums, target) {
-//     for(let i=0;i<nums.length;i++){
-//         for (let j=i+1;j<nums.length;j++){
-//             if((nums[i]+nums[j])==target){
-//                 let result=[i,j];
-//                 return console.log(result)
-//             }
-//         }
-//     }
-// };
+//two sum
+function two_sum(nums, target) {
+    for(let i=0;i<nums.length;i++){
+        for (let j=i+1;j<nums.length;j++){
+            if((nums[i]+nums[j])==target){
+                let result=[i,j];
+                return console.log(result)
+            }
+        }
+    }
+};
 
-// let arr_two_sum = [2,5,5,11]
-// two_sum(arr_two_sum,10)
+let arr_two_sum = [2,5,5,11]
+two_sum(arr_two_sum,10)
 
-// function selection2(arr) {
-//     let min;
-//     for (let i = 0; i < arr.length-1; i++) {
-//         min = i;
-//         for (let j = i+1; j < arr.length; j++) {
-//                 if (arr[min] > arr[j]) {
-//              min=j
-//                 }
-//         }
-//         if (min!==i){
-//             [arr[i], arr[min]] = [arr[min], arr[i]];
-//         }
-// }
-// console.log("Selection Sort2:", arr)
-// }
-// let arr_selection2 = [-4,0,7,4,9,-5,-1,0,-7,-1]
-// selection2(arr_selection2);
+function selection2(arr) {
+    let min;
+    for (let i = 0; i < arr.length-1; i++) {
+        min = i;
+        for (let j = i+1; j < arr.length; j++) {
+                if (arr[min] > arr[j]) {
+             min=j
+                }
+        }
+        if (min!==i){
+            [arr[i], arr[min]] = [arr[min], arr[i]];
+        }
+}
+console.log("Selection Sort2:", arr)
+}
+let arr_selection2 = [-4,0,7,4,9,-5,-1,0,-7,-1]
+selection2(arr_selection2);
 
-//Merge Sort
-// function mergeSort(arr){
-//     if(arr.length<=1)return arr;
+// Merge Sort
+function mergeSort2(arr){
+    if(arr.length<=1)return arr;
 
-//    let mid=(arr.length/2);
-//     let left=mergeSort(arr.slice(0,mid));
-//     let right=mergeSort(arr.slice(mid));
-//    return merge(left,right);
-// }
+   let mid=(arr.length/2);
+    let left=mergeSort2(arr.slice(0,mid));
+    let right=mergeSort2(arr.slice(mid));
+   return merge2(left,right);
+}
 
-// function merge(left, right){
-//     let sortedArr=[];
-//     while(left.length&&right.length){
-//     if(left[0]<right[0]){
-//         sortedArr.push(left.shift());
-//     }
-//     else{
-//         sortedArr.push(right.shift());
-//     }}
-//     return [...sortedArr,...left,...right]
-// }
+function merge2(left, right){
+    let sortedArr=[];
+    while(left.length&&right.length){
+    if(left[0]<right[0]){
+        sortedArr.push(left.shift());
+    }
+    else{
+        sortedArr.push(right.shift());
+    }}
+    return [...sortedArr,...left,...right]
+}
 
-// console.log("Merge Sort",mergeSort([5,6,0,1,7]))
+console.log("Merge Sort 2",mergeSort2([5,6,0,1,7]))
 
 
 // 56):- Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input. 
@@ -383,7 +383,6 @@ console.log(car)
 var merge = function (intervals) {
     if (intervals.length <= 1) return intervals
     let sortedArr = mergeSort(intervals)
-    console.log("sorted Arr", sortedArr)
     let resultArr = [];
     let firstSeq = sortedArr[0]
     resultArr.push(firstSeq)
@@ -427,4 +426,38 @@ function mergeArray(left, right) {
     }
     return [...sortedArray, ...left, ...right]
 }
-console.log(merge([[0, 1], [4, 5], [0, 2], [3, 4], [2, 4], [0, 0], [3, 5], [0, 1], [0, 0], [5, 5]])) //All test Cases resolved 
+console.log("Merge Sort timeline",merge([[0, 1], [4, 5], [0, 2], [3, 4], [2, 4], [0, 0], [3, 5], [0, 1], [0, 0], [5, 5]])) //All test Cases resolved 
+
+//Quick Sort
+function quickSort(arr){
+    if(arr.length<=1) return arr;
+    let pivot=arr[0];
+    let left=[];
+    let right=[]; 
+    for(let i=1;i<arr.length; i++){
+        if(arr[i]<pivot){
+            left.push(arr[i]);
+        }else{
+            right.push(arr[i]);
+        }
+    }
+    return [...quickSort(left),pivot,...quickSort(right)]
+}
+
+console.log("Quick Sort",quickSort([5,1,1,2,"_",0]))
+
+
+var removeDuplicates = function(nums) {
+    let first=nums[0];
+    for(let i=1;i<nums.length;i++){
+        if(nums[i]==first){
+           nums.splice(i, 1);
+        }else{
+            first=nums[i]
+        }
+    }
+    return nums
+};
+
+
+console.log(removeDuplicates([1,1,2]))
