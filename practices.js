@@ -525,10 +525,45 @@ console.log(containsDuplicate([2,14,18,22,22]))
 // };
 // console.log("Strings questions",isAnagram("ggii","eekk"))
 
-var isAnagram = function(s, t) {
-   
- };
-// console.log("Strings questions",isAnagram("ggii","eekk"))
+// var productExceptSelf = function(nums) {
+//     let n=nums.length;
+//     let result=[];
+//     for(let i=0;i<n;i++){
+//         var product=1;
+//        for(let j=0;j<n;j++){
+        
+//              if(i==j){
+//                 continue;
+//              }
+//             product=product*nums[j]
+    
+//     }
+//     result.push(product)
+//     }
+//     return result
+//     };
 
-let sd="g".charCodeAt()-"a".charCodeAt()
-console.log(sd)
+    var productExceptSelf = function(nums) {
+        let n=nums.length;
+        let left=[];
+        let right=[];
+        let output=[];
+        left[0]=nums[0];
+        right[n-1]=nums[n-1];
+        console.log("right----->",right)
+        for(let i=1;i<n;i++){
+            left[i]=left[i-1]*nums[i];
+        }
+        console.log("left----->",left)
+        for(let j=n-2;j>=0;j--){
+            right[j]=right[j+1]*nums[j]
+        }
+        console.log("right----->",right)
+        output[0]=right[1];
+        output[n-1]=left[n-2]
+        for(let o=1;o<=n-2;o++){
+            output[o]=left[o-1]*right[o+1]
+        }
+        return output;
+        };
+ console.log("leetcode questions 238:",productExceptSelf([1,2,3,4]))  //All test Cases resolved 
