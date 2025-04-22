@@ -567,3 +567,29 @@ console.log(containsDuplicate([2,14,18,22,22]))
         return output;
         };
  console.log("leetcode questions 238:",productExceptSelf([1,2,3,4]))  //All test Cases resolved 
+
+
+
+ var maxArea = function(height) { //Brute force 
+    let left=0;
+    let right=0;
+    let max_water=0;
+    for(let i=0;i<height.length;i++){
+        for(let j=i+1;j<height.length;j++){
+            if(i==1){
+            left=height[i]
+            right=height[j]
+    let width=Math.max((i-j),(j-i));
+    let length=Math.min(left,right);
+           let max=width*length;
+           console.log("Areas------->",max)
+           if(max>max_water){
+            max_water=max
+           }
+        }
+        }
+    }
+    return max_water;
+    };
+
+    console.log("leetcode questions 11:",maxArea([1,8,6,2,5,4,8,3,7]))
