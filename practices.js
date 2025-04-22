@@ -443,7 +443,6 @@ function quickSort(arr){
     }
     return [...quickSort(left),pivot,...quickSort(right)]
 }
-
 console.log("Quick Sort",quickSort([5,1,1,2,"_",0]))
 
 
@@ -458,6 +457,78 @@ var removeDuplicates = function(nums) {
     }
     return nums
 };
-
-
 console.log(removeDuplicates([1,1,2]))
+
+
+var containsDuplicate = function(nums) {
+    nums.sort((a,b)=>a-b)
+        for(let i=0;i<nums.length-1;i++){
+                    if(nums[i]==nums[i+1]){
+                        return true;
+                     }
+           
+        }
+        return false;
+    };
+console.log(containsDuplicate([2,14,18,22,22]))
+
+
+
+// var isAnagram = function(s, t) {
+//    let arr_S= s.split("")
+//    let arr_T= t.split("")
+
+//    arr_T.sort()
+//    arr_S.sort()
+
+//    console.log(arr_T)
+//    console.log(arr_S)
+//    if (arr_S.length!==arr_T.length) return false
+//    for(let i=0;i<arr_S.length;i++){
+//      if(arr_S[i]!==arr_T[i]){
+//         return false;
+//      }
+//    }
+//    return true;
+// };
+// console.log("Strings questions",isAnagram("anagram","nagaram"))
+
+
+//Alternative way  -----> {possibility that , the sum can be same}
+// var isAnagram = function(s, t) {
+//    let arr_S= s.split("")
+//    let arr_T= t.split("")
+//    if (arr_S.length!==arr_T.length) return false
+
+// //    arr_T.sort()
+// //    arr_S.sort()
+// let S=0;
+// let T=0;
+
+// for(let j=0;j<arr_T.length;j++){
+//     let code=arr_T[j].charCodeAt(0);
+//     S=S+code;
+// }
+// for(let i=0;i<arr_S.length;i++){
+//     let code=arr_S[i].charCodeAt(0);
+//     T=T+code;
+// }
+
+// console.log("S---> ",S)
+// console.log("T---> ",T)
+// if(S==T){
+//     return true;
+// }else{
+//     return false;
+// }
+  
+// };
+// console.log("Strings questions",isAnagram("ggii","eekk"))
+
+var isAnagram = function(s, t) {
+   
+ };
+// console.log("Strings questions",isAnagram("ggii","eekk"))
+
+let sd="g".charCodeAt()-"a".charCodeAt()
+console.log(sd)
