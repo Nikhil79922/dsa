@@ -280,26 +280,26 @@ let arr_Bubble = [29, 10, 14, 37, 14]
 bubble(arr_Bubble);
 
 //Selection Sort
-    function selection(arr) {
-        let min;
-        let index;
-        for (let i = 0; i < arr.length; i++) {
-            let val=false
-            min = arr[i];
-            for (let j = i; j < arr.length; j++) {
-                    if (min > arr[j]) {
-                        min = arr[j]
-                        index = j
-                        val=true;
-                    }
+function selection(arr) {
+    let min;
+    let index;
+    for (let i = 0; i < arr.length; i++) {
+        let val = false
+        min = arr[i];
+        for (let j = i; j < arr.length; j++) {
+            if (min > arr[j]) {
+                min = arr[j]
+                index = j
+                val = true;
             }
-            if (arr[i]>=arr[index]&&val){
-                [arr[i], arr[index]] = [arr[index], arr[i]];
-            }
+        }
+        if (arr[i] >= arr[index] && val) {
+            [arr[i], arr[index]] = [arr[index], arr[i]];
+        }
     }
     console.log("Selection Sort:", arr)
 }
-let arr_selection = [-4,0,7,4,9,-5,-1,0,-7,-1]
+let arr_selection = [-4, 0, 7, 4, 9, -5, -1, 0, -7, -1]
 selection(arr_selection);
 
 //Insertion Sort
@@ -322,60 +322,61 @@ insertion(arr_insertion);
 
 //two sum
 function two_sum(nums, target) {
-    for(let i=0;i<nums.length;i++){
-        for (let j=i+1;j<nums.length;j++){
-            if((nums[i]+nums[j])==target){
-                let result=[i,j];
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if ((nums[i] + nums[j]) == target) {
+                let result = [i, j];
                 return console.log(result)
             }
         }
     }
 };
 
-let arr_two_sum = [2,5,5,11]
-two_sum(arr_two_sum,10)
+let arr_two_sum = [2, 5, 5, 11]
+two_sum(arr_two_sum, 10)
 
 function selection2(arr) {
     let min;
-    for (let i = 0; i < arr.length-1; i++) {
+    for (let i = 0; i < arr.length - 1; i++) {
         min = i;
-        for (let j = i+1; j < arr.length; j++) {
-                if (arr[min] > arr[j]) {
-             min=j
-                }
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[min] > arr[j]) {
+                min = j
+            }
         }
-        if (min!==i){
+        if (min !== i) {
             [arr[i], arr[min]] = [arr[min], arr[i]];
         }
+    }
+    console.log("Selection Sort2:", arr)
 }
-console.log("Selection Sort2:", arr)
-}
-let arr_selection2 = [-4,0,7,4,9,-5,-1,0,-7,-1]
+let arr_selection2 = [-4, 0, 7, 4, 9, -5, -1, 0, -7, -1]
 selection2(arr_selection2);
 
 // Merge Sort
-function mergeSort2(arr){
-    if(arr.length<=1)return arr;
+function mergeSort2(arr) {
+    if (arr.length <= 1) return arr;
 
-   let mid=(arr.length/2);
-    let left=mergeSort2(arr.slice(0,mid));
-    let right=mergeSort2(arr.slice(mid));
-   return merge2(left,right);
+    let mid = (arr.length / 2);
+    let left = mergeSort2(arr.slice(0, mid));
+    let right = mergeSort2(arr.slice(mid));
+    return merge2(left, right);
 }
 
-function merge2(left, right){
-    let sortedArr=[];
-    while(left.length&&right.length){
-    if(left[0]<right[0]){
-        sortedArr.push(left.shift());
+function merge2(left, right) {
+    let sortedArr = [];
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            sortedArr.push(left.shift());
+        }
+        else {
+            sortedArr.push(right.shift());
+        }
     }
-    else{
-        sortedArr.push(right.shift());
-    }}
-    return [...sortedArr,...left,...right]
+    return [...sortedArr, ...left, ...right]
 }
 
-console.log("Merge Sort 2",mergeSort2([5,6,0,1,7]))
+console.log("Merge Sort 2", mergeSort2([5, 6, 0, 1, 7]))
 
 
 // 56):- Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input. 
@@ -426,51 +427,51 @@ function mergeArray(left, right) {
     }
     return [...sortedArray, ...left, ...right]
 }
-console.log("Merge Sort timeline",merge([[0, 1], [4, 5], [0, 2], [3, 4], [2, 4], [0, 0], [3, 5], [0, 1], [0, 0], [5, 5]])) //All test Cases resolved 
+console.log("Merge Sort timeline", merge([[0, 1], [4, 5], [0, 2], [3, 4], [2, 4], [0, 0], [3, 5], [0, 1], [0, 0], [5, 5]])) //All test Cases resolved 
 
 //Quick Sort
-function quickSort(arr){
-    if(arr.length<=1) return arr;
-    let pivot=arr[0];
-    let left=[];
-    let right=[]; 
-    for(let i=1;i<arr.length; i++){
-        if(arr[i]<pivot){
+function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+    let pivot = arr[0];
+    let left = [];
+    let right = [];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < pivot) {
             left.push(arr[i]);
-        }else{
+        } else {
             right.push(arr[i]);
         }
     }
-    return [...quickSort(left),pivot,...quickSort(right)]
+    return [...quickSort(left), pivot, ...quickSort(right)]
 }
-console.log("Quick Sort",quickSort([5,1,1,2,"_",0]))
+console.log("Quick Sort", quickSort([5, 1, 1, 2, "_", 0]))
 
 
-var removeDuplicates = function(nums) {
-    let first=nums[0];
-    for(let i=1;i<nums.length;i++){
-        if(nums[i]==first){
-           nums.splice(i, 1);
-        }else{
-            first=nums[i]
+var removeDuplicates = function (nums) {
+    let first = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] == first) {
+            nums.splice(i, 1);
+        } else {
+            first = nums[i]
         }
     }
     return nums
 };
-console.log(removeDuplicates([1,1,2]))
+console.log(removeDuplicates([1, 1, 2]))
 
 
-var containsDuplicate = function(nums) {
-    nums.sort((a,b)=>a-b)
-        for(let i=0;i<nums.length-1;i++){
-                    if(nums[i]==nums[i+1]){
-                        return true;
-                     }
-           
+var containsDuplicate = function (nums) {
+    nums.sort((a, b) => a - b)
+    for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] == nums[i + 1]) {
+            return true;
         }
-        return false;
-    };
-console.log(containsDuplicate([2,14,18,22,22]))
+
+    }
+    return false;
+};
+console.log(containsDuplicate([2, 14, 18, 22, 22]))
 
 
 
@@ -521,7 +522,7 @@ console.log(containsDuplicate([2,14,18,22,22]))
 // }else{
 //     return false;
 // }
-  
+
 // };
 // console.log("Strings questions",isAnagram("ggii","eekk"))
 
@@ -531,85 +532,154 @@ console.log(containsDuplicate([2,14,18,22,22]))
 //     for(let i=0;i<n;i++){
 //         var product=1;
 //        for(let j=0;j<n;j++){
-        
+
 //              if(i==j){
 //                 continue;
 //              }
 //             product=product*nums[j]
-    
+
 //     }
 //     result.push(product)
 //     }
 //     return result
 //     };
 
-    var productExceptSelf = function(nums) {
-        let n=nums.length;
-        let left=[];
-        let right=[];
-        let output=[];
-        left[0]=nums[0];
-        right[n-1]=nums[n-1];
-        console.log("right----->",right)
-        for(let i=1;i<n;i++){
-            left[i]=left[i-1]*nums[i];
-        }
-        console.log("left----->",left)
-        for(let j=n-2;j>=0;j--){
-            right[j]=right[j+1]*nums[j]
-        }
-        console.log("right----->",right)
-        output[0]=right[1];
-        output[n-1]=left[n-2]
-        for(let o=1;o<=n-2;o++){
-            output[o]=left[o-1]*right[o+1]
-        }
-        return output;
-        };
- console.log("leetcode questions 238:",productExceptSelf([1,2,3,4]))  //All test Cases resolved 
+var productExceptSelf = function (nums) {
+    let n = nums.length;
+    let left = [];
+    let right = [];
+    let output = [];
+    left[0] = nums[0];
+    right[n - 1] = nums[n - 1];
+    for (let i = 1; i < n; i++) {
+        left[i] = left[i - 1] * nums[i];
+    }
+    for (let j = n - 2; j >= 0; j--) {
+        right[j] = right[j + 1] * nums[j]
+    }
+    output[0] = right[1];
+    output[n - 1] = left[n - 2]
+    for (let o = 1; o <= n - 2; o++) {
+        output[o] = left[o - 1] * right[o + 1]
+    }
+    return output;
+};
+console.log("leetcode questions 238:", productExceptSelf([1, 2, 3, 4]))  //All test Cases resolved 
 
 
 
- var maxArea = function(height) { //Brute force 
-    let left=0;
-    let right=0;
-    let max_water=0;
-    for(let i=0;i<height.length;i++){
-        for(let j=i+1;j<height.length;j++){
-            if(i==1){
-            left=height[i]
-            right=height[j]
-    let width=Math.max((i-j),(j-i));
-    let length=Math.min(left,right);
-           let max=width*length;
-           console.log("Areas------->",max)
-           if(max>max_water){
-            max_water=max
-           }
-        }
+var maxArea = function (height) { //Brute force 
+    let left = 0;
+    let right = 0;
+    let max_water = 0;
+    for (let i = 0; i < height.length; i++) {
+        for (let j = i + 1; j < height.length; j++) {
+            if (i == 1) {
+                left = height[i]
+                right = height[j]
+                let width = Math.max((i - j), (j - i));
+                let length = Math.min(left, right);
+                let max = width * length;
+                if (max > max_water) {
+                    max_water = max
+                }
+            }
         }
     }
     return max_water;
-    };
+};
 
-    console.log("leetcode questions 11:",maxArea([1,8,6,2,5,4,8,3,7]))
+console.log("(Approach 1):- leetcode questions 11:", maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+var maxArea1 = function (height) { //optimal Solution (Two pointer approach)
+    let n = height.length;
+    let l = 0;
+    let r = n - 1;
+    let max_water = 0;
+    for (let i = 0; i < height.length; i++) {
+        let left = height[l];
+        let right = height[r];
+        let width = r - l;
+        let length = Math.min(left, right)
+        let max = width * length;
+        if (max > max_water) {
+            max_water = max;
+        }
+        if (left > right) {
+            r = r - 1;
+        } else {
+            l = l + 1;
+        }
+    }
+    return max_water;
+};
+console.log("(Approach 2):- leetcode questions 11:", maxArea1([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+var insert = function (intervals, newInterval) {
+    let n = intervals.length;
+    let startIndex = 0;
+    let verify = true;
+    let endIndex = 1;
+    let Inserted_arr = [];
+    if (n == 0) return [newInterval];
+    for (let i = 0; i < n; i++) {
+        if (intervals[i][startIndex] >= newInterval[startIndex] && verify) {
+            Inserted_arr.push(newInterval)
+            Inserted_arr.push(intervals[i])
+            verify = false;
+        } else {
+            if (n == 1) {
+                Inserted_arr.push(intervals[i])
+                Inserted_arr.push(newInterval)
+            } else {
+                Inserted_arr.push(intervals[i])
+            }
+        }
+    }
+    if(intervals.length==Inserted_arr.length){
+        Inserted_arr.push(newInterval)
+    }
+    let output_arr = []
+    output_arr.push(Inserted_arr[startIndex])
+    for (let j = 0; j < Inserted_arr.length; j++) {
+        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] >= Inserted_arr[j][endIndex]) {
+            continue;
+        }
+        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] <= Inserted_arr[j][endIndex]) {
+            let new_ele = [output_arr[startIndex][0], Inserted_arr[j][endIndex]]
+            if (new_ele[1] >= output_arr[startIndex][endIndex]) {
+                output_arr.pop()
+                output_arr.push(new_ele);
+            }
+        } else {
+            output_arr.push(Inserted_arr[j]);
+            startIndex++;
+        }
+    }
+
+    return output_arr;
+};
+console.log("leetcode questions 57:", insert([[2,6],[7,9]], [15,18]))
 
 
+var hammingDistance = function(x, y) {
+    x.toString(2);
+    y.toString(2);
+    if(x.length>y.length){
+        while(x.length!==y.length) y="0"+y;
+    }else{
+         while(x.length!==y.length) x="0"+x;
+    }
+    console.log("x----------->",x)
+    console.log("y----------->",y)
+    let distance =0;
+    for(let i=0;i<x.length;i++){
+        if(x[i]!==y[i]){
+            distance++;
+        }
+    }
+    return distance 
+};
+console.log("leetcode questions 461:", hammingDistance(1,4)
 
 
-
-
-
-
-
-
-
-
-
-    //Donrifa :- 
-    eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00iLCJ0eXAiOiJKV1QifQ.P8bJi3zq6a2xmgDGrLBUf2yls8HITWplv9HT6Inf5dg4ClRJtxD7OYZvEWf1x4f2SZtLbpEhLS4VUjxU38LNFftLvX_r4UhSOVt07RxaGT4UJ4MEsFJGq55X-RS7M-lSVgFgr4qBB6k1eyROgDxVkNF2kvFj0-WbZanjLKp4Tas.RPwFja6NMkuI_tnH._HhRzlZg4X7jaZt8jTvlMEPtNumC0m7gp4MXIEXsMPSdFtTBgdPIAAS416Q9Yp44NlUsfuGHJVMpE5zmDGJJIwmuHbe4YU5nPu3bCVkuUjq443JsGRTKgjV3o3scJA8SOtEfQhRbLdxBFWd3pkxbD2LBg6dOe6myzIUmyaYyNG2icxuS41m6OcEe6H49MHkGGuLc4YiO_7Lf6gJylQbUiQQV36olN4nYAPgARhdKYwiL1yGU77-KJOshjh9d8NSCIvjw8D53hp9nZ7i_K5jtLKGsw66q8hdjDEyjsx9VA12KUUxIgBWoTauDfnqppwuftOs9lS6mgH1OE22Nt1QRPiaajQwBvf_B6rPmtKPh2_Fcw5TyuJ92Os1y28CISoqrILEg0OJ1nq0XlN-gBhV0lt0-BnxRbi763kieFydVv674TopzwBXlyEP4XPiRaLv2fJqG3fLsZyvXFpvCHbHVKt9J-BzibcTToUwGzs7a0_Ir0lw9YlpdCqFv4kF_0SXaVgn8QMaJ1vK80tH6K9__zK73k3ai2AEp5Ms_q_Zv71eXojvtzgjTvEaU1Ic8LjGXaOcUmTgx5rFwaH0AFkKTUFVPwXnqq5vovjaCqeYl1BGurlID7d08axqboEfsy0eN0MD6zm4v7n5Ohw84GSYUgnLfOGEfsFMBownr6Us5_CoQBjh6d37a-k6lJY8b2TXFesifIBCkE_LovqZCpfP_IbgMxf5GbzZ8NzryKX0JaMXWndpXdbVf8hq3FJ7SAjnABNv0AUh1ILOAVc0_C44B3ISjtZxteGBpKleRbwPjokuZfmrY.rw7G2Exlk6qT0jAW7gxDJA
-
-
-    eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00iLCJ0eXAiOiJKV1QifQ.HGA5QfdciSYrs6s8lwekh-cfq9Om3PuriNVX6seoOwt-XIYPNgG8FlJ7R5bR79MlltrsfrYQiHei5M1681tcX_TrRBEgPStZIfG5nx8djpvHtl9etb-q5SwZeru_3MgVrtfmU5cWmhnn50wxrIClGXSrw6766acpzAgX0Eyufxk.U358egGSiKdltaJG.VuYtcFF_rRgsK8FRY--jJiALl0hqiamsJbmjsc4mXb-uCCmvHhXlPF-FXf4137EXlOHHMcui4tvdWUAqgp6Mv39GQs0boCKkFxNbX1qaC6Uvjt1Fqha-WGoVJefF-qO6kkBnlGv7BolQXVTxe9E7bda1nz_IWkiUSlbbZulAvbctK7N9JnJpbbqJCgh7_JGz_bJB7l_mdBfakD5RdxUms6g_XPfAy9peM6D43SEvd345zDvq8E5g3_dEncV6zdJBjYGwaZVSOdTl_zbJZ6uIPIvktrrwma1AxWMggmh-rn9eBEX9b40baABfwB107Oxr8fyVu9oOwpCb5digsqdMWaTttAYiuyBHzzXp1CUHuFSFTa-iQIvspQaOyWRVkdISTGGVtTNPfiimNItCxJMqzhTYdKJRCmZLIqDlgZKPM6bqYRTdstfiqAHIAxzzn6dqFySvFaH7A-QztTWhu3KaywPDYQKD_4ERgFV6SqtLfyJUNYhI-yPPo2mb-tK1Yv_EmXPw2391OCzJ_Cpe9wJmPiZx-a3LPtGfi7GJRtKG2dhPdsIg4lnKrIusYWg2hDnsBwMppt4X09FzJAve6Bc2YMPy-RasQvjSXXgTC0KVtQpe-XGWmiShjjkD5J-ogHm77avb6Aeck0eWwXNRJWHvrNGg1tNJ7sETtkumgA2BrxSKH0VIEku-XfX09u3nMrM-2vepecTlpbnMRPkcPZu9xAYD0mFPc559jS0e_JXHp3Zp4CHurMNb9-bze8wMhzqzVfD-lM3QuFgrM-f5TEEDQQzrKGeV0EKFswryQkvazDb8DEQFAowDLYsr6LBlNXv5-5C98GRGoL6z-CxRmK0BgNmOymflwDYzbVkyuc-F6fNXun4EXPRmyVvW3P7tQ1vHJXkFpq7gkB3Hzc3attjc_5ug2k45vOCn1uU1ONt0LJmR4gtelWsJS0MpoHLAbUs3UWCgGYCYoooU7x6moB29ZlJPdl84iOxjPHwNHP1Z6eZlEgUVy5dUD3i4YL1tbisY0BywnVlPkFWoR8D49uphdQrW1GKx7cgAeLayhiXTgLIQ5SdkS06R.QticO13VJk6m-pQgk7YJqA
-
-    eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00iLCJ0eXAiOiJKV1QifQ.ZHayvED5ucX9uI4HhyrDcFXS6vIN7sLdXCK0FkM_wrp2xz8XOASo0qc0Y5D8wfW-YpDcTVwc1Mmm3ZHt9BeoBEJCnobIb6uNEdOeweSWeEd3I3jPAnrApa887psOGWD24d9SgQ4wZhNG2mB85kMtksphy4cuj8CJqiv2autcEgI.9bQZhlNZzzX_oQ9j.lIZ3xs6PHpF6RjDUi7IKXfHSMNOiKNL_67u-Zv7ibjXrMSpfrzCwwj9WSHy09vwMqiwqhfILhr2F2YPva1tPkx1fVp0I-1ofmlXOtIkGQdjMdpCSQ4I6caDaXtd15Yy802Br_At7XysbI3-iqdCe0MiSq4hzc6Xu6dzfXx4XTw8sJFPJ8cT6qy1JSnteEogMgsvuacANKE_5rjieadsaWXA_OH_fnzdcXco4u-ckIhNLCxpCSIagojtKTEmSFM9E_vAm1zczASfz2remsJy5c0aSDqyJivCVJGNkvEN0ilHqC4rw14TFRT2RUmjMLP69ub830nHGcr9PnTm7Ox16jGzmACJ1Qjpn_lKMWPx65MuRbDfELkyZ2fgpsZ8ygZSBvahx8htjc7gq-PPEqiRvd3qE_NkSxHeCwio49oM_JTkT4tK29CV1gE4LUlECM1ytJU5FduBaSfjwY4O5uFqkxx1sQqBKA3caCnDDO4AyVxXHRLySMb_2K6TYNsx3z73FGY8W-nu7NxSh6AnqJrysPEfLitTPTJnIuN8FEoflNMX5uur5QOno8lDMte5TAy_19c6EOk710Q3UX0CJIpI58Hr1ykuJObeDT7SKjNWYJiOwzYoPVQdFQIiSxld8SlJTKPw8QkD7jKX3KTnSDl-pVDXgrUKbLQkOSv58C0147DpBtNEXPQqP70FPxLMPkXrZh4vb9P7RuFVfJNiUsTyj9m7sL8KGT1fvXcn2E-3K8wzh1qwpgh4flGJlRoei0K5QUTI9mK3UB92J6ZfrRgqcp1I9poFVFR9VOnhAPu4T5837WctxpzhJE7aXRafN_aFptLudX-0OTzXkpo_8ao35t3DzCkTdKP22Rw2Gq62FtU2vEwwIvNdRnrju1DuxlVA9bWjaKA21dQ1xJ2lDbAjWgJTfSiOeNTTvBPsKXSF4j8SY5z1smUOqqnwM9dxthxnHFwTgCWRPAnWZC4ZgdXNXp75Yl0fX8d8OiS0NwYA9QYFxGCoZsaOcDbTUVPoSsKb0G0sRlKUU08A7coRTc4RWeQg9zjeyIwma45pv-ZMbjIlOlI8YJv5VnWHKjF_Av95-ECf5zZjz1RUxUIFvZ44pjktSXqRP-8IAbn6fRiE0B3upaOLDnjXEPcVpVGFetptwWZxvEfpNBSfxgfv1oSGTRhEDWNr21RxoW7Ezs-NB74T5ZGTXzkN6twS-zvNiGGth-mgI0vTjWOSbszXXLAa61SpmOmC200yW9IP_8qDAVKg5uNGclgUObpyZ44XMOhrx44zGgkMpBRObdfwW7Yp5UZoUGXVXdoevAtVJiho6cRaODpt26RydQCypnSSQa2uaxUfFCNiblhVTuYbY3cJdxlGdQDIQqvm0BcC_Xr78Ij8QXGVi6Y5Sf4RceK_jBlB54cS7Urg35BHGXVirxzZNLxWs_93t9DnLnlx8HPQb8pU5cR7tc1cmqlu5jhvuo_vMcVH58sXHZ-pgXNVSULz0XzG2d8OCclRlEsOpUvYXiexp37l525aGmz0f_EWAIs6j9T492gUAZMRktlc_VW97Jou9dfz95Zakq5_oMA4TvKxJmyPSCVQgPeGl22CuWiBm-H_WBi-iVYUqBTUPlQcta8H-LQjMfov84e3hI46K6PuMO5gkxWql6RsxgsHhMpIzo_OJPXNWgBwTPKKGpDtF7IeSodfENvAZsjnnXVp_RrAQ9DP9eC89_VireDW1Bv3xtXbezCqqxseYzAzy_hmUKS0DdPvks3FBXUKA3A.A-Fik042eJ1AOP9eikrfhA
