@@ -663,23 +663,19 @@ console.log("leetcode questions 57:", insert([[2,6],[7,9]], [15,18]))
 
 
 var hammingDistance = function(x, y) {
-    x.toString(2);
-    y.toString(2);
-    if(x.length>y.length){
-        while(x.length!==y.length) y="0"+y;
+    let X=x.toString(2);
+    let Y=y.toString(2);
+    if(X.length>Y.length){
+        while(X.length!==Y.length) Y="0"+Y;
     }else{
-         while(x.length!==y.length) x="0"+x;
+         while(X.length!==Y.length) X="0"+X;
     }
-    console.log("x----------->",x)
-    console.log("y----------->",y)
     let distance =0;
-    for(let i=0;i<x.length;i++){
-        if(x[i]!==y[i]){
+    for(let i=0;i<X.length;i++){
+        if(X[i]!==Y[i]){
             distance++;
         }
     }
     return distance 
 };
-console.log("leetcode questions 461:", hammingDistance(1,4)
-
-
+console.log("leetcode questions 461:", hammingDistance(1,4))
