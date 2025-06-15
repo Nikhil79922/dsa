@@ -679,3 +679,40 @@ var hammingDistance = function(x, y) {
     return distance 
 };
 console.log("leetcode questions 461:", hammingDistance(1,4))
+
+//LettCode -15
+var threeSum = function(nums) {
+    const n=nums.length;
+    let Allsum=[];
+    let uniqueSum=-1;
+    let output=[];
+    for(let i=0;i<n;i++){
+      for(let j=0;j<n;j++){
+          for(let k=0;k<n;k++){
+                  if((nums[i]+nums[j]+nums[k])==0 && (k!=i) && (k!=j) && (i!=j)){
+                      let result=[]
+                     let sum=Math.abs(nums[i])+Math.abs(nums[j])+Math.abs(nums[k])
+                     
+                             let valid=true
+                      for(let m=0;m<Allsum.length;m++){
+                   
+                          if(Allsum[m]==sum){
+                            valid=false;
+                       break;
+                          }
+                      }
+                      if(valid){
+                          result.push(nums[i],nums[j],nums[k]);
+                      output.push(result);
+                       if(uniqueSum!=sum){
+                      Allsum.push(sum);
+                      uniqueSum=sum;
+                      }
+                      } 
+                  }
+              }
+      }
+    }
+    return output;  
+  };
+
