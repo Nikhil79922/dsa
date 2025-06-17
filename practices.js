@@ -716,3 +716,49 @@ var threeSum = function(nums) {
     return output;  
   };
 
+
+//   Leetcode 15 (second Approach)
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+   const sortedArr = nums.sort((a, b) => a - b);
+   let output=[]
+for(let i=0;i<nums.length;i++){
+    
+    let k=nums.length - 1 ;
+    for(let j=i+1;j<nums.length;j++){
+        if(nums[i]==0&&nums[j]==0&&nums[k]==0){
+               let result=[nums[i],nums[j],nums[k]]
+            output.push(result);
+            return output;
+    }
+        if(k<=j){
+            break;
+        }
+        if(nums[j]==nums[j+1]){
+            continue;
+        }
+        if(nums[k]==nums[k-1]){
+             k--;
+            continue;
+        }
+        if((nums[j]+nums[k])==(-nums[i])){
+            let result=[nums[i],nums[j],nums[k]]
+            output.push(result);
+            k--;
+        }else{
+           if((nums[j]+nums[k])>(-nums[i])){
+            k--;
+            j--;
+           }
+        }
+    }
+}
+if(output.length>=2){
+
+output.pop();
+}
+return output;
+};
