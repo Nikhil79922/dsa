@@ -681,3 +681,76 @@ var hammingDistance = function(x, y) {
 console.log("leetcode questions 461:", hammingDistance(1,4))
 
 //LettCode -15
+var threeSum = function(nums) {
+   const sortedArr = nums.sort((a, b) => a - b);
+   let output=[]
+for(let i=0;i<sortedArr.length;i++){
+    if(sortedArr[i]==sortedArr[i-1]){
+        continue;
+    }
+    let k=sortedArr.length - 1 ;
+    for(let j=i;j<sortedArr.length;j++){
+        if(k<=j){
+            break;
+        }
+        if(sortedArr[j]==sortedArr[j+1]){
+            continue;
+        }
+        if(sortedArr[k]==sortedArr[k-1]){
+             k--;
+            continue;
+        }
+        if((sortedArr[j]+sortedArr[k])==(-sortedArr[i])){
+            let result=[sortedArr[i],sortedArr[j],sortedArr[k]]
+            output.push(result);
+            k--;
+        }else{
+           if((sortedArr[j]+sortedArr[k])>(-sortedArr[i])){
+            k--;
+            j--;
+           }
+        }
+    }
+}
+return output;
+};
+
+//Leetcode 16
+
+var threeSumClosest = function(nums, target) {
+    
+let output = Infinity;
+    let sortedArr=nums.sort((a,b)=>a-b);
+    let n=nums.length;
+    if(n<3) return [];
+    for(let i=0;i<n;i++){
+        if(i>0 && sortedArr[i]==sortedArr[i-1]){
+         continue;
+        }
+        let left=i+1;
+        let right=n-1;
+        while(left<right){
+            let close=0;
+            if( (sortedArr[i]+sortedArr[left]+sortedArr[right])==target ){
+                return target;
+            }
+            else if((sortedArr[i]+sortedArr[left]+sortedArr[right])>target){
+                close=sortedArr[i]+sortedArr[left]+sortedArr[right]-target;
+                if(i==0){
+                    ouput = close;
+                }
+                if(close>output){
+                    output=close;
+                    right--;
+                    left--;
+                }
+             
+            }
+               else{
+                    right--;
+                    continue;
+                }
+        }
+    }
+    return output
+};
