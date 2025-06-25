@@ -747,6 +747,7 @@ let output = Infinity;
              
             }
                else{
+                
                     right--;
                     continue;
                 }
