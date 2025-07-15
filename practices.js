@@ -544,138 +544,182 @@ console.log(containsDuplicate([2, 14, 18, 22, 22]))
 //     return result
 //     };
 
-var productExceptSelf = function (nums) {
-    let n = nums.length;
-    let left = [];
-    let right = [];
-    let output = [];
-    left[0] = nums[0];
-    right[n - 1] = nums[n - 1];
-    for (let i = 1; i < n; i++) {
-        left[i] = left[i - 1] * nums[i];
-    }
-    for (let j = n - 2; j >= 0; j--) {
-        right[j] = right[j + 1] * nums[j]
-    }
-    output[0] = right[1];
-    output[n - 1] = left[n - 2]
-    for (let o = 1; o <= n - 2; o++) {
-        output[o] = left[o - 1] * right[o + 1]
-    }
-    return output;
-};
-console.log("leetcode questions 238:", productExceptSelf([1, 2, 3, 4]))  //All test Cases resolved 
 
 
 
-var maxArea = function (height) { //Brute force 
-    let left = 0;
-    let right = 0;
-    let max_water = 0;
-    for (let i = 0; i < height.length; i++) {
-        for (let j = i + 1; j < height.length; j++) {
-            if (i == 1) {
-                left = height[i]
-                right = height[j]
-                let width = Math.max((i - j), (j - i));
-                let length = Math.min(left, right);
-                let max = width * length;
-                if (max > max_water) {
-                    max_water = max
+
+// var productExceptSelf = function (nums) {
+//     let n = nums.length;
+//     let left = [];
+//     let right = [];
+//     let output = [];
+//     left[0] = nums[0];
+//     right[n - 1] = nums[n - 1];
+//     for (let i = 1; i < n; i++) {
+//         left[i] = left[i - 1] * nums[i];
+//     }
+//     for (let j = n - 2; j >= 0; j--) {
+//         right[j] = right[j + 1] * nums[j]
+//     }
+//     output[0] = right[1];
+//     output[n - 1] = left[n - 2]
+//     for (let o = 1; o <= n - 2; o++) {
+//         output[o] = left[o - 1] * right[o + 1]
+//     }
+//     return output;
+// };
+// console.log("leetcode questions 238:", productExceptSelf([1, 2, 3, 4]))  //All test Cases resolved 
+
+
+
+// var maxArea = function (height) { //Brute force 
+//     let left = 0;
+//     let right = 0;
+//     let max_water = 0;
+//     for (let i = 0; i < height.length; i++) {
+//         for (let j = i + 1; j < height.length; j++) {
+//             if (i == 1) {
+//                 left = height[i]
+//                 right = height[j]
+//                 let width = Math.max((i - j), (j - i));
+//                 let length = Math.min(left, right);
+//                 let max = width * length;
+//                 if (max > max_water) {
+//                     max_water = max
+//                 }
+//             }
+//         }
+//     }
+//     return max_water;
+// };
+
+// console.log("(Approach 1):- leetcode questions 11:", maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+// var maxArea1 = function (height) { //optimal Solution (Two pointer approach)
+//     let n = height.length;
+//     let l = 0;
+//     let r = n - 1;
+//     let max_water = 0;
+//     for (let i = 0; i < height.length; i++) {
+//         let left = height[l];
+//         let right = height[r];
+//         let width = r - l;
+//         let length = Math.min(left, right)
+//         let max = width * length;
+//         if (max > max_water) {
+//             max_water = max;
+//         }
+//         if (left > right) {
+//             r = r - 1;
+//         } else {
+//             l = l + 1;
+//         }
+//     }
+//     return max_water;
+// };
+// console.log("(Approach 2):- leetcode questions 11:", maxArea1([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+// var insert = function (intervals, newInterval) {
+//     let n = intervals.length;
+//     let startIndex = 0;
+//     let verify = true;
+//     let endIndex = 1;
+//     let Inserted_arr = [];
+//     if (n == 0) return [newInterval];
+//     for (let i = 0; i < n; i++) {
+//         if (intervals[i][startIndex] >= newInterval[startIndex] && verify) {
+//             Inserted_arr.push(newInterval)
+//             Inserted_arr.push(intervals[i])
+//             verify = false;
+//         } else {
+//             if (n == 1) {
+//                 Inserted_arr.push(intervals[i])
+//                 Inserted_arr.push(newInterval)
+//             } else {
+//                 Inserted_arr.push(intervals[i])
+//             }
+//         }
+//     }
+//     if(intervals.length==Inserted_arr.length){
+//         Inserted_arr.push(newInterval)
+//     }
+//     let output_arr = []
+//     output_arr.push(Inserted_arr[startIndex])
+//     for (let j = 0; j < Inserted_arr.length; j++) {
+//         if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] >= Inserted_arr[j][endIndex]) {
+//             continue;
+//         }
+//         if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] <= Inserted_arr[j][endIndex]) {
+//             let new_ele = [output_arr[startIndex][0], Inserted_arr[j][endIndex]]
+//             if (new_ele[1] >= output_arr[startIndex][endIndex]) {
+//                 output_arr.pop()
+//                 output_arr.push(new_ele);
+//             }
+//         } else {
+//             output_arr.push(Inserted_arr[j]);
+//             startIndex++;
+//         }
+//     }
+
+//     return output_arr;
+// };
+// console.log("leetcode questions 57:", insert([[2,6],[7,9]], [15,18]))
+
+
+// var hammingDistance = function(x, y) {
+//     let X=x.toString(2);
+//     let Y=y.toString(2);
+//     if(X.length>Y.length){
+//         while(X.length!==Y.length) Y="0"+Y;
+//     }else{
+//          while(X.length!==Y.length) X="0"+X;
+//     }
+//     let distance =0;
+//     for(let i=0;i<X.length;i++){
+//         if(X[i]!==Y[i]){
+//             distance++;
+//         }
+//     }
+//     return distance 
+// };
+// console.log("leetcode questions 461:", hammingDistance(1,4))
+
+
+
+//Leetcode 16
+var threeSumClosest = function (nums, target) {
+    let len = nums.length;
+    let closest = Infinity;
+    let totalSum = 0;
+    const sorted = nums.sort((a, b) => a - b)
+    for (let i = 0; i < len - 1; i++) {
+        let left = i + 1;
+        let right = len - 1;
+        while (left < right) {
+            let sum = (sorted[i] + sorted[left] + sorted[right])
+            if (sum > target) {
+                right--;
+            } else {
+                left++
+            }
+            if (sum == target) {
+                totalSum = sum;
+                return totalSum;
+            }
+            let distance = target - sum;
+            if (distance >= 0) {
+                if (distance <= closest) {
+                    closest = distance;
+                    totalSum = sum;
+                }
+            } else {
+                if (Math.abs(distance) <= closest) {
+                    closest = Math.abs(distance);
+                    totalSum = sum;
                 }
             }
         }
     }
-    return max_water;
+    return totalSum;
 };
-
-console.log("(Approach 1):- leetcode questions 11:", maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
-
-var maxArea1 = function (height) { //optimal Solution (Two pointer approach)
-    let n = height.length;
-    let l = 0;
-    let r = n - 1;
-    let max_water = 0;
-    for (let i = 0; i < height.length; i++) {
-        let left = height[l];
-        let right = height[r];
-        let width = r - l;
-        let length = Math.min(left, right)
-        let max = width * length;
-        if (max > max_water) {
-            max_water = max;
-        }
-        if (left > right) {
-            r = r - 1;
-        } else {
-            l = l + 1;
-        }
-    }
-    return max_water;
-};
-console.log("(Approach 2):- leetcode questions 11:", maxArea1([1, 8, 6, 2, 5, 4, 8, 3, 7]))
-
-var insert = function (intervals, newInterval) {
-    let n = intervals.length;
-    let startIndex = 0;
-    let verify = true;
-    let endIndex = 1;
-    let Inserted_arr = [];
-    if (n == 0) return [newInterval];
-    for (let i = 0; i < n; i++) {
-        if (intervals[i][startIndex] >= newInterval[startIndex] && verify) {
-            Inserted_arr.push(newInterval)
-            Inserted_arr.push(intervals[i])
-            verify = false;
-        } else {
-            if (n == 1) {
-                Inserted_arr.push(intervals[i])
-                Inserted_arr.push(newInterval)
-            } else {
-                Inserted_arr.push(intervals[i])
-            }
-        }
-    }
-    if(intervals.length==Inserted_arr.length){
-        Inserted_arr.push(newInterval)
-    }
-    let output_arr = []
-    output_arr.push(Inserted_arr[startIndex])
-    for (let j = 0; j < Inserted_arr.length; j++) {
-        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] >= Inserted_arr[j][endIndex]) {
-            continue;
-        }
-        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] <= Inserted_arr[j][endIndex]) {
-            let new_ele = [output_arr[startIndex][0], Inserted_arr[j][endIndex]]
-            if (new_ele[1] >= output_arr[startIndex][endIndex]) {
-                output_arr.pop()
-                output_arr.push(new_ele);
-            }
-        } else {
-            output_arr.push(Inserted_arr[j]);
-            startIndex++;
-        }
-    }
-
-    return output_arr;
-};
-console.log("leetcode questions 57:", insert([[2,6],[7,9]], [15,18]))
-
-
-var hammingDistance = function(x, y) {
-    let X=x.toString(2);
-    let Y=y.toString(2);
-    if(X.length>Y.length){
-        while(X.length!==Y.length) Y="0"+Y;
-    }else{
-         while(X.length!==Y.length) X="0"+X;
-    }
-    let distance =0;
-    for(let i=0;i<X.length;i++){
-        if(X[i]!==Y[i]){
-            distance++;
-        }
-    }
-    return distance 
-};
-console.log("leetcode questions 461:", hammingDistance(1,4))
+threeSumClosest([10,20,30,40,50,60,70,80,90],1)
