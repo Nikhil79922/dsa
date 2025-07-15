@@ -723,3 +723,170 @@ var threeSumClosest = function (nums, target) {
     return totalSum;
 };
 threeSumClosest([10,20,30,40,50,60,70,80,90],1)
+
+console.log("(Approach 1):- leetcode questions 11:", maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+var maxArea1 = function (height) { //optimal Solution (Two pointer approach)
+    let n = height.length;
+    let l = 0;
+    let r = n - 1;
+    let max_water = 0;
+    for (let i = 0; i < height.length; i++) {
+        let left = height[l];
+        let right = height[r];
+        let width = r - l;
+        let length = Math.min(left, right)
+        let max = width * length;
+        if (max > max_water) {
+            max_water = max;
+        }
+        if (left > right) {
+            r = r - 1;
+        } else {
+            l = l + 1;
+        }
+    }
+    return max_water;
+};
+console.log("(Approach 2):- leetcode questions 11:", maxArea1([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+
+var insert = function (intervals, newInterval) {
+    let n = intervals.length;
+    let startIndex = 0;
+    let verify = true;
+    let endIndex = 1;
+    let Inserted_arr = [];
+    if (n == 0) return [newInterval];
+    for (let i = 0; i < n; i++) {
+        if (intervals[i][startIndex] >= newInterval[startIndex] && verify) {
+            Inserted_arr.push(newInterval)
+            Inserted_arr.push(intervals[i])
+            verify = false;
+        } else {
+            if (n == 1) {
+                Inserted_arr.push(intervals[i])
+                Inserted_arr.push(newInterval)
+            } else {
+                Inserted_arr.push(intervals[i])
+            }
+        }
+    }
+    if(intervals.length==Inserted_arr.length){
+        Inserted_arr.push(newInterval)
+    }
+    let output_arr = []
+    output_arr.push(Inserted_arr[startIndex])
+    for (let j = 0; j < Inserted_arr.length; j++) {
+        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] >= Inserted_arr[j][endIndex]) {
+            continue;
+        }
+        if (output_arr[startIndex][endIndex] >= Inserted_arr[j][0] && output_arr[startIndex][endIndex] <= Inserted_arr[j][endIndex]) {
+            let new_ele = [output_arr[startIndex][0], Inserted_arr[j][endIndex]]
+            if (new_ele[1] >= output_arr[startIndex][endIndex]) {
+                output_arr.pop()
+                output_arr.push(new_ele);
+            }
+        } else {
+            output_arr.push(Inserted_arr[j]);
+            startIndex++;
+        }
+    }
+
+    return output_arr;
+};
+console.log("leetcode questions 57:", insert([[2,6],[7,9]], [15,18]))
+
+
+var hammingDistance = function(x, y) {
+    let X=x.toString(2);
+    let Y=y.toString(2);
+    if(X.length>Y.length){
+        while(X.length!==Y.length) Y="0"+Y;
+    }else{
+         while(X.length!==Y.length) X="0"+X;
+    }
+    let distance =0;
+    for(let i=0;i<X.length;i++){
+        if(X[i]!==Y[i]){
+            distance++;
+        }
+    }
+    return distance 
+};
+console.log("leetcode questions 461:", hammingDistance(1,4))
+
+//LettCode -15
+var threeSum = function(nums) {
+   const sortedArr = nums.sort((a, b) => a - b);
+   let output=[]
+for(let i=0;i<sortedArr.length;i++){
+    if(sortedArr[i]==sortedArr[i-1]){
+        continue;
+    }
+    let k=sortedArr.length - 1 ;
+    for(let j=i;j<sortedArr.length;j++){
+        if(k<=j){
+            break;
+        }
+        if(sortedArr[j]==sortedArr[j+1]){
+            continue;
+        }
+        if(sortedArr[k]==sortedArr[k-1]){
+             k--;
+            continue;
+        }
+        if((sortedArr[j]+sortedArr[k])==(-sortedArr[i])){
+            let result=[sortedArr[i],sortedArr[j],sortedArr[k]]
+            output.push(result);
+            k--;
+        }else{
+           if((sortedArr[j]+sortedArr[k])>(-sortedArr[i])){
+            k--;
+            j--;
+           }
+        }
+    }
+}
+return output;
+};
+
+//Leetcode 16
+
+var threeSumClosest = function(nums, target) {
+    
+let output = Infinity;
+    let sortedArr=nums.sort((a,b)=>a-b);
+    let n=nums.length;
+    if(n<3) return [];
+    for(let i=0;i<n;i++){
+        if(i>0 && sortedArr[i]==sortedArr[i-1]){
+         continue;
+        }
+        let left=i+1;
+        let right=n-1;
+        while(left<right){
+            let close=0;
+            if( (sortedArr[i]+sortedArr[left]+sortedArr[right])==target ){
+                return target;
+            }
+            else if((sortedArr[i]+sortedArr[left]+sortedArr[right])>target){
+                close=sortedArr[i]+sortedArr[left]+sortedArr[right]-target;
+                if(i==0){
+                    ouput = close;
+                }
+                if(close>output){
+                    output=close;
+                    right--;
+                    left--;
+                }
+             
+            }
+               else{
+                
+                    right--;
+                    continue;
+                }
+        }
+    }
+    return output
+};
