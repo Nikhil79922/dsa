@@ -872,7 +872,7 @@ let output = Infinity;
             else if((sortedArr[i]+sortedArr[left]+sortedArr[right])>target){
                 close=sortedArr[i]+sortedArr[left]+sortedArr[right]-target;
                 if(i==0){
-                    ouput = close;
+                    output = close;
                 }
                 if(close>output){
                     output=close;
@@ -890,3 +890,4 @@ let output = Infinity;
     }
     return output
 };
+

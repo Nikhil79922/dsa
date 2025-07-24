@@ -13,5 +13,5 @@ const k = 5
 console.log(Kth_missing(arr, k))
 
 //K represent the index of the missiong element 
-//Count represent the idnex of the missing element 
+//Count represent the index of the missing element 
 
