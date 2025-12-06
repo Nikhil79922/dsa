@@ -195,3 +195,36 @@ var removeElement = function (nums, val) {
     return k;
 };
 removeElement([2],3)
+
+
+//Count Inversion:- 
+function countInversions(arr) {
+    return mergeSortCI(arr).inversionCount;
+}
+
+function mergeSortCI(arr){
+    let n=arr.length;
+    if (arr.length <= 1) return { arr, inversionCount: 0 };
+    let mid=Math.floor(arr.length/2);
+    let left=mergeSortCI(arr.slice(0,mid));
+    let right=mergeSortCI(arr.slice(mid));
+    let merged=mergeCI(left.arr,right.arr);
+    let totalInversionCount=left.inversionCount + right.inversionCount + merged.inversionCount
+    return {
+        arr: merged.arr,
+        inversionCount:totalInversionCount
+       };
+    }
+function mergeCI(left,right){
+let sorted=[];
+let inversionCount=0;
+while(left.length && right.length){
+    if(left[0]>right[0]){
+        sorted.push(right.shift());
+        inversionCount +=left.length
+    }else{
+        sorted.push(left.shift());
+    }
+}
+return {arr:[...sorted,...left,...right],inversionCount}
+}
