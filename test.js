@@ -228,3 +228,47 @@ while(left.length && right.length){
 }
 return {arr:[...sorted,...left,...right],inversionCount}
 }
+
+
+//Reverse Pair 
+
+function reversePairs(arr) {
+    return mergeSortCI(arr).inversionCount;
+}
+
+function mergeSortCI(arr){
+    let n=arr.length;
+    if (arr.length <= 1) return { arr, inversionCount: 0 };
+    let mid=Math.floor(arr.length/2);
+    let left=mergeSortCI(arr.slice(0,mid));
+    let right=mergeSortCI(arr.slice(mid));
+    let merged=mergeCI(left.arr,right.arr);
+    let totalInversionCount=left.inversionCount + right.inversionCount + merged.inversionCount
+    return {
+        arr: merged.arr,
+        inversionCount: totalInversionCount
+    };
+    }
+function mergeCI(left,right){
+let inversionCount=0;
+let i=0;j=0
+while(i<left.length && j<right.length){
+    if(left[i]>2*right[j]){
+        inversionCount +=(left.length-i);
+        j++;
+    }else{
+        i++;
+    }
+}
+ let sorted = [];
+    let p = 0, q = 0;
+
+    while (p < left.length && q < right.length) {
+        if (left[p] <= right[q]) sorted.push(left[p++]);
+        else sorted.push(right[q++]);
+    }
+
+    while (p < left.length) sorted.push(left[p++]);
+    while (q < right.length) sorted.push(right[q++]);
+ return { arr: sorted, inversionCount };
+}
