@@ -272,3 +272,45 @@ while(i<left.length && j<right.length){
     while (q < right.length) sorted.push(right[q++]);
  return { arr: sorted, inversionCount };
 }
+
+//Book Allocation 
+class Solution {
+    findPages(arr, k) {
+     let n= arr.length;
+     if (k > n) return -1;
+     let left=0;
+     let ans=-1;
+     let right= arr.reduce((a, b) => a + b, 0);
+        while(left<=right){
+            let mid=Math.floor((left+right)/2);
+            let valid=this.isValid(arr,n,k,mid);
+            if(valid){
+                ans=mid;
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+    isValid(arr,n,k,mid){
+        let student=1;
+        let arrSum=0;
+        for(let i=0;i<arr.length;i++){
+            if(arr[i]>mid){
+                return false
+            }
+            if((arrSum+arr[i]) <=mid){
+                arrSum += arr[i];
+            }else{
+         student +=1;
+         arrSum=arr[i];
+            }
+        }
+        if(student>k){
+            return false;
+        }else{
+            return true;
+        }
+    }
+}
