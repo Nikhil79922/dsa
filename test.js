@@ -314,3 +314,38 @@ class Solution {
         }
     }
 }
+
+//Aggrr Cow And Magnatic ball problem 
+
+var maxDistance=(nums , C)=>{
+    let n=nums.length;
+    nums.sort((a,b)=>a-b)
+    let low=1;
+    let high=nums[n-1]-nums[0];
+    let ans=-1
+    while(low<=high){
+        let mid=Math.floor((low+high)/2)
+        if(isValid(nums, n, C, mid)){
+            ans=mid;
+            low=mid+1;
+        }else{
+            high=mid-1;
+        }
+    }
+    return ans;
+}
+
+var isValid=(nums , n , C , mid)=>{
+    let cow=1;
+    let lastCowIndex=nums[0];
+    for(let i=1;i<n;i++){
+        if(nums[i]-lastCowIndex >= mid){
+            cow++;
+            lastCowIndex=nums[i];
+        }
+        if(cow==C) return true;
+    }
+    return false;
+}
+
+maxDistance([5,4,3,2,1,1000000000],2)
