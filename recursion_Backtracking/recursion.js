@@ -51,4 +51,3 @@ function binary(left,right,arr,target){
 }
 let arr=[-1,0,3,5,9,12]
 console.log("Binay Search===>",binary(0,arr.length-1,arr,9))
-console.log("Testing the git revert command")
