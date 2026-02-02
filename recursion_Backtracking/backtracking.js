@@ -57,3 +57,37 @@ var solveNQueens = function (n) {
        }
        return true;
    }
+
+
+
+   // M- coloring graph 
+   var graphColoring=  function(v, edge ,M){
+    let adj= Array.from({length:v},()=> []);
+     for(let [x,y] of edge){
+        adj[x].push(y);
+        adj[y].push(x);
+     }
+        function dfs(colors,node){
+            if(node==v){
+                return true;
+            }
+            for(let color=0;color<M;color++){
+                if (safeVertex(node,colors,color,adj)){
+                    colors[node]=color;
+                    dfs(colors,node+1)
+                    colors[node]=0;
+                }
+            }
+            return false;
+        }
+        let colors=new Array(v).fill(0);
+        return dfs(colors,0);
+   }
+   function safeVertex(node,colors,color,adj){
+    for(let element of adj[node]){
+        if(colors[element]===color){
+            return false;
+        }
+    }
+    return true;
+   }
