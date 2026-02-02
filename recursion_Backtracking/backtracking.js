@@ -60,34 +60,47 @@ var solveNQueens = function (n) {
 
 
 
-   // M- coloring graph 
-   var graphColoring=  function(v, edge ,M){
-    let adj= Array.from({length:v},()=> []);
-     for(let [x,y] of edge){
-        adj[x].push(y);
-        adj[y].push(x);
-     }
-        function dfs(colors,node){
-            if(node==v){
-                return true;
-            }
-            for(let color=0;color<M;color++){
-                if (safeVertex(node,colors,color,adj)){
-                    colors[node]=color;
-                    dfs(colors,node+1)
-                    colors[node]=0;
-                }
-            }
-            return false;
-        }
-        let colors=new Array(v).fill(0);
-        return dfs(colors,0);
-   }
-   function safeVertex(node,colors,color,adj){
-    for(let element of adj[node]){
-        if(colors[element]===color){
-            return false;
-        }
+   // M-Coloring Graph
+var graphColoring = function (V, edges, M) {
+
+    // Build adjacency list
+    let adj = Array.from({ length: V }, () => []);
+  
+    for (let [u, w] of edges) {
+      adj[u].push(w);
+      adj[w].push(u);
     }
-    return true;
-   }
+  
+    function safeVertex(node, colors, color) {
+      for (let neighbor of adj[node]) {
+        if (colors[neighbor] === color) {
+          return false;
+        }
+      }
+      return true;
+    }
+  
+    function dfs(node, colors) {
+      if (node === V) {
+        return true;
+      }
+  
+      for (let color = 1; color <= M; color++) {
+        if (safeVertex(node, colors, color)) {
+          colors[node] = color;
+  
+          if (dfs(node + 1, colors)) {
+            return true;
+          }
+  
+          colors[node] = 0; // backtrack
+        }
+      }
+  
+      return false;
+    }
+  
+    let colors = new Array(V).fill(0);
+    return dfs(0, colors) ? colors : null;
+  };
+  
