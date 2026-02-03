@@ -156,3 +156,67 @@ return false;
    var checkValidGrid = function (grid) {
 return checkExpected(grid,0,0,grid.length,0 )
    };
+
+
+
+
+
+   //
+
+
+// 37. Sudoku Solver
+ var isSafeSS = function ( board , row , col , dig){
+  //horizontal check 
+   const ch = dig.toString();
+  for(let c=0;c<9;c++){
+    if(board[row][c]==ch){
+        return false;
+    }
+  }
+  //Vertical check 
+  for(let r=0;r<9;r++){
+    if(board[r][col]==ch){
+        return false;
+    }
+  }
+  //Check the grid
+let sr = Math.floor(row / 3) * 3;
+let sc = Math.floor(col / 3) * 3;
+  for(let i=sr;i<=sr+2;i++){
+    for(let j=sc;j<=sc+2;j++){
+        if(board[i][j]==ch){
+            return false;
+        }
+    }
+  }
+  return true
+}
+
+var helper = function (board , row , col){
+if(row == 9 ){
+    return true;
+}
+let nextRow = row ;
+let nextCol =col+1;
+if(nextCol==9){
+    nextRow=row +1;
+    nextCol=0;
+}
+if(board[row][col] !== "."){
+    return helper(board,nextRow,nextCol)
+}
+for(let dig=1;dig<=9;dig++){
+    if(isSafeSS(board, row , col , dig)){
+        board[row][col]=dig.toString();
+        if(helper(board,nextRow,nextCol)){
+            return true;
+        }
+          board[row][col]=".";
+    }
+}
+return false;
+}
+
+var solveSudoku = function(board) {
+helper(board , 0 , 0)
+};
