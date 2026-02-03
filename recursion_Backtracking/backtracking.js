@@ -134,13 +134,11 @@ maze[r][c]=1;
 
 }
 
-
+//Check Knight Tour Configuration
 function checkExpected(grid, r, c, n, expt) {
   if (r < 0 || c < 0 || r >= n || c >= n || grid[r][c] !== expt) {
 return false;
 }
-
-
      if (expt == n * n - 1) {
        return true;
      }
