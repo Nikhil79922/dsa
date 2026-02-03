@@ -99,8 +99,62 @@ var graphColoring = function (V, edges, M) {
   
       return false;
     }
-  
     let colors = new Array(V).fill(0);
-    return dfs(0, colors) ? colors : null;
+    return dfs(0, colors) ;
   };
+
+
+
+
+
   
+//Rat in the Maze 
+function checkRat(maze , r , c, path,ans){
+  let n=maze.length;
+  if(r==n-1 && c==n-1){
+    ans.push(path);
+    return 
+  }
+if(r<0 || c<0 || r>=n || c>= n || maze[r][c]===0){
+  return false;
+}
+maze[r][c]=0;
+checkRat(maze,r-1,c,path+"U",ans);
+checkRat(maze,r+1,c,path+"D",ans);
+checkRat(maze,r,c+1,path+"R",ans);
+checkRat(maze,r,c-1,path+"L",ans);
+maze[r][c]=1;
+}
+
+  function ratInMaze(maze) {
+    let ans=[]
+    if(maze[0][0]==0) return ans 
+   checkRat(maze,0,0,"",ans);
+   return ans;
+
+}
+
+
+function checkExpected(grid, r, c, n, expt) {
+  if (r < 0 || c < 0 || r >= n || c >= n || grid[r][c] !== expt) {
+return false;
+}
+
+
+     if (expt == n * n - 1) {
+       return true;
+     }
+     let ans1 = checkExpected(grid , r-1,c-2,n,expt+1);
+     let ans2 = checkExpected(grid , r-2,c-1,n,expt+1);
+     let ans3 = checkExpected(grid , r-2,c+1,n,expt+1);
+     let ans4 = checkExpected(grid , r-1,c+2,n,expt+1);
+     let ans5 = checkExpected(grid , r+1,c+2,n,expt+1);
+     let ans6 = checkExpected(grid , r+2,c+1,n,expt+1);
+     let ans7 = checkExpected(grid , r+2,c-1,n,expt+1);
+     let ans8 = checkExpected(grid , r+1,c-2,n,expt+1);
+
+     return ans1||ans2||ans3||ans4||ans5||ans6||ans7||ans8;
+   }
+   var checkValidGrid = function (grid) {
+return checkExpected(grid,0,0,grid.length,0 )
+   };
