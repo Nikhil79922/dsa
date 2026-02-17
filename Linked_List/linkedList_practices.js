@@ -151,3 +151,22 @@ var reverseList = function(head) {
 
     return prev;
 };
+
+
+var detectCycle = function (head) {
+    let slow = head ;
+   let fast = head ;
+   while(fast && fast.next){
+       slow = slow.next;
+       fast = fast.next.next;
+       if(slow ==fast){
+           let pointer = head;
+           while(pointer !== slow){
+               slow=slow.next;
+               pointer =pointer.next;
+           }
+           return pointer;
+       }
+   }
+   return null ;
+};
