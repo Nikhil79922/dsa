@@ -170,3 +170,57 @@ var detectCycle = function (head) {
    }
    return null ;
 };
+
+var addTwoNumbers = function (l1, l2) {
+    let dummy = new ListNode(-1);
+    let current = dummy;
+    let h1 = l1;
+    let h2 = l2;
+    let sum = 0
+    while (h1 !== null && h2 !== null) {
+        let add = (h1.val + h2.val) + sum
+        if (add >= 10) {
+            current.next = new ListNode((add) % 10);
+            sum = Number(add.toString()[0])
+        } else {
+            current.next = new ListNode(add);
+            sum = 0;
+        }
+        h1 = h1.next;
+        h2 = h2.next;
+        current = current.next;
+    }
+
+    while (h1 !== null) {
+        let add = (h1.val) + sum
+        if (add >= 10) {
+            current.next = new ListNode((add) % 10);
+            sum = Number(add.toString()[0])
+        } else {
+            current.next = new ListNode(add);
+            sum = 0;
+        }
+        h1 = h1.next;
+        current = current.next;
+    }
+
+    while (h2 !== null) {
+        let add = (h2.val) + sum
+        if (add >= 10) {
+            current.next = new ListNode((add) % 10);
+            sum = Number(add.toString()[0])
+        } else {
+            current.next = new ListNode(add);
+            sum = 0;
+        }
+        h2 = h2.next;
+        current = current.next;
+    }
+
+    if (sum !== 0) {
+        current.next = new ListNode(sum);
+        current = current.next;
+    }
+
+    return dummy.next;
+};
