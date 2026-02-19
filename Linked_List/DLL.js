@@ -72,6 +72,26 @@ current.prev.next=next
       let current=this.head;
       while(current !== null){
         console.log(current.val);
+         if(next==null){
+current.prev.next=next
+         }else{
+          next.prev=current.prev;
+          current.prev.next=next
+         }
+         break;
+        }
+        current=current.next;
+      }
+    
+
+    // Print Forward
+    printForward(){
+      if(!this.head) {
+        return;
+      }
+      let current=this.head;
+      while(current !== null){
+        console.log(current.val);
         current=current.next;
       }
     }
@@ -99,6 +119,7 @@ current.prev.next=next
         curr=curr.next;
       }
     }
+  
   }
 
 const Doubly=new DLLOPS()
