@@ -145,4 +145,16 @@ PA.setPrice(20)
 PA.applyDiscount(49)
 console.log(PA.getPrice());
 
-//Problem 
+//Problem statement 5
+class Order{
+    #orderId;
+    constructor(Id){
+        this.#orderId = Id;
+    }
+    getOrderId(){
+        return this.#orderId;
+    }
+}
+
+const O=new Order(2);
+console.log(O.getOrderId());
