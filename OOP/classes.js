@@ -39,7 +39,7 @@ class BankAccount {
     }
 
     desposit(amount) {
-        if (amount <= 0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+        if (amount <= 0) return console.warn(`Don't Accept Zero or Less than Zero value.`)
         this.#balance += amount;
     }
 
@@ -64,12 +64,12 @@ class Counter {
     }
 
     increment(value) {
-        if (value <= 0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+        if (value <= 0) return console.warn(`Don't Accept Zero or Less than Zero value.`)
         this.#count += value;
     }
 
     decrement(value) {
-        if (value <= 0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+        if (value <= 0) return  console.warn(`Don't Accept Zero or Less than Zero value.`)
         this.#count -= value;
     }
 
@@ -101,19 +101,19 @@ class UserProfile {
         if (checkemail.includes('@')) {
             this.#email = email;
         } else {
-            console.error('Please add a valid Email formate')
+            return console.error('Please add a valid Email formate')
         }
     }
     setAge(age) {
-             if (age >= 18) console.error(`Not accessible for under 18`)
+        if (age >= 18) return  console.error(`Not accessible for under 18`)
         this.#age = age;
     }
-    getProfile(){
-        return { emai:this.#email , age:this.#age }
+    getProfile() {
+        return { emai: this.#email, age: this.#age }
     }
 }
 
-const user= new UserProfile('nikkssy@gmail.com',2)
+const user = new UserProfile('nikkssy@gmail.com', 2)
 user.setAge(22);
 user.setEmail("ogsignh@gmail.com");
 console.log(user.getProfile())
@@ -121,40 +121,66 @@ console.log(user.getProfile())
 
 
 //Problem statement  4
-class Products{
+class Products {
     #price;
-    constructor(price){
-this.setPrice(price)
+    constructor(price) {
+        this.setPrice(price)
     }
-        setPrice(amount) {
-        if (amount <= 0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+    setPrice(amount) {
+        if (amount <= 0) return console.warn(`Don't Accept Zero or Less than Zero value.`)
         this.#price = amount;
     }
-    applyDiscount(percent){
-          if (percent <= 0) console.warn(`Don't Accept Zero or Less than Zero value.`)
-                      if (percent > 50) console.warn(`Can't get more than 50%`)
-        this.#price *= percent/100;
+    applyDiscount(percent) {
+        if (percent <= 0) return  console.warn(`Don't Accept Zero or Less than Zero value.`)
+        if (percent > 50) return console.warn(`Can't get more than 50%`)
+        this.#price *= percent / 100;
     }
-    getPrice(){
+    getPrice() {
         return this.#price;
     }
 }
 
-const PA= new Products(12);
+const PA = new Products(12);
 PA.setPrice(20)
 PA.applyDiscount(49)
 console.log(PA.getPrice());
 
 //Problem statement 5
-class Order{
+class Order {
     #orderId;
-    constructor(Id){
+    constructor(Id) {
         this.#orderId = Id;
     }
-    getOrderId(){
+    getOrderId() {
         return this.#orderId;
     }
 }
 
-const O=new Order(2);
+const O = new Order(2);
 console.log(O.getOrderId());
+
+//Problem Statement 6
+class LoginSystem {
+    #password;
+    #loginAttempts;
+
+    constructor(pwd) {
+        this.setPwd(pwd)
+    }
+
+    setPwd(pwd) {
+        this.#password = pwd;
+        this.#loginAttempts = 0
+    }
+    login(pwd) {
+        if(this.#loginAttempts == 3) return console.error("Account Locked")
+        if(this.#password === pwd){
+           return console.log(`Login SuccessFull...`);
+        }
+        this.#loginAttempts +=1;
+    }
+resetAttempts(pwd){
+    this.#password = pwd;
+      this.#loginAttempts =0 ;
+}
+}
