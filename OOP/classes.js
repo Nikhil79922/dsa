@@ -54,3 +54,34 @@ BA.desposit(30)
 BA.desposit(40)
 let totalSaving = BA.getBalance();
 console.log("TotalSaving ===>",totalSaving)
+
+
+//Problem statement
+class Counter{
+    #count=0;
+    constructor(count){
+this.increment(count);
+    }
+
+    increment(value){
+        if(value<=0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+         this.#count+=value;
+    }
+
+    decrement(value){
+          if(value<=0) console.warn(`Don't Accept Zero or Less than Zero value.`)
+         this.#count-=value;
+    }
+
+    getValue(){
+        return this.#count;
+    }
+}
+
+const CA= new Counter(10);
+CA.increment(20)
+CA.increment(30)
+CA.increment(40)
+CA.decrement(2)
+let totalCount = CA.getValue();
+console.log("TotalCount ===>",totalCount)
