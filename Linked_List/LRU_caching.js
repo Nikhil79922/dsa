@@ -79,3 +79,29 @@ LRUCache.prototype.put = function (key, value) {
  * var param_1 = obj.get(key)
  * obj.put(key,value)
  */
+
+
+
+//Problem 25. Reverse Nodes in k-Group
+var reverseKGroup = function(head, k) {
+    let temp = head;
+    let count= 0;
+    while(count<k){
+        if(temp == null) return head;
+        temp=temp.next;
+        count++;
+    }
+
+    let prevNode= reverseKGroup(temp , k);
+
+    temp = head;
+    count = 0;
+    while(count < k){
+        let next =temp.next;
+        temp.next= prevNode;
+        prevNode = temp;
+        temp=next;
+        count++;
+    }
+    return prevNode;
+};
