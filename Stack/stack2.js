@@ -63,3 +63,37 @@ size(){
       return this.size() === 0; 
     }
   }
+
+   class reverse{
+    constructor(str){
+      this.str=str;
+    }
+    stk=[]
+    rev(){
+      let arr =this.str.split('');
+      for(let i=arr.length-1 ; i>=0 ; i--){
+         this.stk.push(arr[i]);
+      }
+      return this.stk.join('');
+    }  
+  }
+
+
+  class nextGreater{
+  constructor(arr){
+    this.arr=arr;
+  }
+  NG(){
+    let stack= [];
+    let result = new Array(this.arr.length).fill(-1);
+    stack.push(i);
+    for(let i=0; i<this.arr.length; i++){
+      while(stack.length > 0 && this.arr[i] > this.arr[stack[stack.length -1]]){
+        let index = stack.pop();
+        result[index]=this.arr[i];
+      }
+
+    }
+    return result
+  }
+}
