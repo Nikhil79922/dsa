@@ -134,3 +134,23 @@ class Solution {
         return q;
     }
 }
+
+
+
+var nextGreaterElements = function(nums) {
+    let n = nums.length;
+    let stack = [];
+    let ans = new Array(n).fill(-1);
+
+    for (let i = 0; i < 2 * n; i++) {
+       let curr= nums[i%n];
+       while(stack.length && nums[stack[stack.length -1]]<curr){
+        let idx = stack.pop();
+        ans[idx] = curr;
+       }
+          if(i<n){
+            stack.push(i)
+        }
+    }
+    return ans;
+};
