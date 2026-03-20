@@ -114,3 +114,23 @@ MyQueue.prototype.empty = function() {
  * var param_4 = obj.empty()
  */
 
+class Solution {
+    reverseFirstK(q, k) {
+        if (k <= 0 || k > q.length) return q;
+
+        let stack = [];
+        for (let i = 0; i < k; i++) {
+            stack.push(q.shift());
+        }
+
+        while (stack.length) {
+            q.push(stack.pop());
+        }
+        let size = q.length - k;
+        while (size--) {
+            q.push(q.shift());
+        }
+
+        return q;
+    }
+}
