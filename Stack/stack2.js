@@ -97,3 +97,44 @@ size(){
     return result
   }
 }
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSumMinProduct = function (nums) {
+  let n = nums.length;
+  let prefix = new Array(n);
+  let leftMin = new Array(n).fill(-1);
+  let stack = [];
+  let rightMin = new Array(n).fill(n);
+  let stack2 = [];
+
+  for (let i = 0; i < n; i++) {
+      prefix[i] = i === 0 ? nums[i] : prefix[i - 1] + nums[i];
+      while (stack.length && nums[stack[stack.length - 1]] >= nums[i]) {
+          stack.pop();
+      }
+      leftMin[i] = stack.length ? stack[stack.length - 1] : -1;
+      stack.push(i);
+
+      while (stack2.length && nums[stack2[stack2.length - 1]] > nums[i]) {
+          let idx = stack2.pop();
+          rightMin[idx] = i
+      }
+      stack2.push(i)
+  }
+
+  let max = 0n;
+
+  for (let i = 0; i < n; i++) {
+      let left = leftMin[i] + 1;
+      let right = rightMin[i] - 1;
+
+      let total = BigInt(prefix[right]) - BigInt(left > 0 ? prefix[left - 1] : 0);
+      let curr = total * BigInt(nums[i]);
+
+      if (curr > max) max = curr;
+  }
+  return Number(max % 1000000007n);
+};
