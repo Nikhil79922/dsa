@@ -125,7 +125,7 @@ var maxSumMinProduct = function (nums) {
       stack2.push(i)
   }
 
-  let max = 0n;
+  let max = 0n; 
 
   for (let i = 0; i < n; i++) {
       let left = leftMin[i] + 1;
@@ -138,3 +138,28 @@ var maxSumMinProduct = function (nums) {
   }
   return Number(max % 1000000007n);
 };
+
+
+var canCompleteCircuit = function(gas, cost) {
+  let totalGas= gas[0];
+  let totalCost= cost[0];
+  
+  for(let i = 1 ;i<gas.length; i++){
+      totalGas += gas[i];
+      totalCost += cost[i];
+  }
+  if(totalCost > totalGas){
+      return -1;
+  }
+  let start= 0 ;
+  let curr= 0;
+  
+  for(let i = 0 ;i<cost.length; i++){
+      curr += gas[i] - cost[i]
+      if(curr < 0){
+          start = i+ 1;
+          curr= 0
+      }
+  }
+  return start 
+  };
