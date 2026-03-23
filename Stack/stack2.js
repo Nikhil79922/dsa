@@ -163,3 +163,38 @@ var canCompleteCircuit = function(gas, cost) {
   }
   return start 
   };
+
+
+  /**
+ * @param {number[]} heights
+ * @return {number}
+ */
+var largestRectangleArea = function(heights) {
+  let n =heights.length;
+  let left=new Array(n).fill(-1);
+  let stack1 =[]
+  let right = new Array(n).fill(n);
+  let stack2=[];
+ 
+ for(let i=0 ; i<heights.length; i++){
+ while(stack1.length && heights[stack1[stack1.length -1]] > heights[i]){
+     stack1.pop();
+ }
+ left[i]= stack1.length ? stack1[stack1.length -1] : -1;
+ stack1.push(i);
+ 
+ while(stack2.length && heights[stack2[stack2.length -1]] > heights[i]){
+     const insert = stack2.pop();
+     right[insert]= i
+ }
+ stack2.push(i);
+ }
+ let maxArea= 0 ;
+ for(let i= 0 ; i<heights.length ; i++){
+     let l= left[i] + 1;
+     let r= right[i];
+     let area= heights[i] * (r-l)
+     maxArea= Math.max(maxArea , area);
+ }
+ return maxArea;
+ };
