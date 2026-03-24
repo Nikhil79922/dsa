@@ -198,3 +198,20 @@ var largestRectangleArea = function(heights) {
  }
  return maxArea;
  };
+
+ var stockspan = function(stock) {
+  let n= stock.length;
+  let s = [];
+  let ans=new Array(n).fill(1);
+  for(let i=0; i<n; i++){
+     while(s.length && stock[s[s.length -1 ]] <= stock[i]){
+       s.pop();
+     }
+     ans[i]= s.length ? i - s[s.length -1] : i+ 1
+     s.push(i)
+  }
+
+  return ans;
+ } 
+
+ console.log("StackSpan===>", stockspan([100 ,80, 60,70,60,75,85]))
