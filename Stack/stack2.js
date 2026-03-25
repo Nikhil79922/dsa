@@ -223,8 +223,8 @@ var celebritySearch= function(grid){
   for(let i =0 ; i<n ; i++){
   stack.push(i);
   while(stack.length > 1){
-    let i = stack.pop;
-    let j= stack.pop;
+    let i = stack.pop();
+    let j= stack.pop();
     if(grid[i][j] == 0){
       stack.push(i);
     }else{
