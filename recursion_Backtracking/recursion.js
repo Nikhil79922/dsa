@@ -52,3 +52,43 @@ function binary(left,right,arr,target){
 let arr=[-1,0,3,5,9,12]
 console.log("Binay Search===>",binary(0,arr.length-1,arr,9))
 console.log("Git reset command test!");
+
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    let str= String(x)
+     let len = str.length;
+   function rev(s, n){
+        s += str[n]
+   if(n == 0){
+    return s
+   }
+   n--
+return rev(s,n)
+   } 
+  let palin = rev('',len-1);
+ return palin == str ? true : false
+};
+
+
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function(s) {
+    let len = s.length;
+    function rev(s, n,m){
+    if(n >= m){
+     return
+    }
+    [s[n] , s[m]]=[s[m] , s[n]];
+    m--;
+    n++
+ return rev(s,n,m)
+    } 
+    rev(s,0,len-1);
+    return s
+ };

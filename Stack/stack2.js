@@ -217,31 +217,37 @@ var largestRectangleArea = function(heights) {
  console.log("StackSpan===>", stockspan([100 ,80, 60,70,60,75,85]))
 
 
-var celebritySearch= function(grid){
-  let n= grid.length;
-  let stack=[];
-  for(let i =0 ; i<n ; i++){
-  stack.push(i);
-  while(stack.length > 1){
+ var celebritySearch = function(grid) {
+  let n = grid.length;
+  let stack = [];
+
+  for (let i = 0; i < n; i++) {
+    stack.push(i);
+  }
+
+  while (stack.length > 1) {
     let i = stack.pop();
-    let j= stack.pop();
-    if(grid[i][j] == 0){
+    let j = stack.pop();
+
+    if (grid[i][j] == 0) {
       stack.push(i);
-    }else{
+    } else {
       stack.push(j);
     }
   }
-  }
 
-  let celeb= stack.pop();
+  let celeb = stack.pop();
 
-  for(let i=0;i<n; i++){
-    if(i!=celeb && (grid[i][celeb] == 0 || grid[celeb][i]==1) ){
+  for (let i = 0; i < n; i++) {
+    if (i !== celeb && (grid[i][celeb] == 0 || grid[celeb][i] == 1)) {
       return -1;
     }
   }
+
   return celeb;
+};
 
-} 
-
-console.log("Found celebrity -======>",celebritySearch([[0,1,0] , [0,0,0] , [0,1,0]]))
+console.log(
+  "Found celebrity -======>",
+  celebritySearch([[0,1,0],[0,0,0],[0,1,0]])
+);
