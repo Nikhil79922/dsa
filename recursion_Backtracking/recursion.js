@@ -92,3 +92,50 @@ var reverseString = function(s) {
     rev(s,0,len-1);
     return s
  };
+
+
+ //Sum of N number 
+
+ const sumN = function (N){
+    function count(n){
+      if(n > N){
+        return 0
+      }
+     return n + count(n+1);
+    }
+   let totalSum= count(1);
+   console.log(totalSum)
+   return totalSum
+  
+  }
+ console.log(sumN(3))
+
+
+
+ const reverseArr = function (arr){
+    let len = arr.length;
+    function count(n,m){
+     if(n>=m){
+        return
+     }
+     [arr[n], arr[m]]=[arr[m],arr[n]];
+      count(++n,--m);
+    }
+      count(0 , len-1);
+   return arr
+  }
+ console.log(reverseArr([1,2,3,4,5,6]))
+
+
+ const palinDromCheck = function (str){
+    let len = str.length;
+    function count(n){
+     if(n < 0 ){
+        return true
+     }
+     if ( str[n] !== str[len-1-n] ) return false;
+      return count(--n);
+    }
+    return   count(len-1);
+  }
+ console.log(palinDromCheck('-121'))

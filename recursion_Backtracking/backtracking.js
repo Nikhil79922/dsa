@@ -104,9 +104,6 @@ var graphColoring = function (V, edges, M) {
   };
 
 
-
-
-
   
 //Rat in the Maze 
 function checkRat(maze , r , c, path,ans){
@@ -156,13 +153,6 @@ return false;
    var checkValidGrid = function (grid) {
 return checkExpected(grid,0,0,grid.length,0 )
    };
-
-
-
-
-
-   //
-
 
 // 37. Sudoku Solver
  var isSafeSS = function ( board , row , col , dig){
@@ -220,3 +210,20 @@ return false;
 var solveSudoku = function(board) {
 helper(board , 0 , 0)
 };
+
+
+// Print from 1 To N , using Backtracking 
+
+const reverseCount = function (N){
+
+  function count(n){
+    if(n > N){
+      return 
+    }
+    count(n+1);
+    console.log(n)
+  }
+  count(1)
+
+}
+reverseCount(10)
