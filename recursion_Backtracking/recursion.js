@@ -139,3 +139,22 @@ var reverseString = function(s) {
     return   count(len-1);
   }
  console.log(palinDromCheck('-121'))
+
+
+
+ const PrintSequence = function (arr) {
+let len = arr.length;
+function printData(n,path){
+   if(n>= len){
+      console.log(path);
+      return
+   }
+path.push(arr[n]);
+printData(n+1 , path);
+path.pop();
+printData(n+1,path);
+}
+printData(0,[]);
+ }
+
+ PrintSequence([1,2,3])
