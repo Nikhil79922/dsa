@@ -141,20 +141,28 @@ var reverseString = function(s) {
  console.log(palinDromCheck('-121'))
 
 
-//Level two , print the sub Sequnce sum equalll to k 
+//Level two , print the sub Sequnce sum equalll to k , only any one case to print 
  const PrintSequence = function (arr , k) {
 let len = arr.length;
 function printData(n,path,sum){
    if(n>= len){
-      if(sum == k ) console.log(path);
-      return
+      if( sum == k ){
+         console.log(path);
+         return true;
+      } 
+      return false;
    }
    sum += arr[n]
 path.push(arr[n]);
-printData(n+1 , path, sum);
+if (printData(n+1,path,sum) == true){
+   return true
+}
 sum -= path[path.length -1]
 path.pop();
-printData(n+1,path,sum);
+if (printData(n+1,path,sum) == true){
+   return true
+}
+return false
 }
 printData(0,[],0);
  }
