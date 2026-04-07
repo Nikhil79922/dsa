@@ -7,50 +7,50 @@
 // seq(4)
 
 //Factorial form n!
-function factorial(n){
-if(n==0) return 1
-return n * factorial(n-1);
+function factorial(n) {
+   if (n == 0) return 1
+   return n * factorial(n - 1);
 }
 console.log(factorial(4))
 
 //Sum of all the number till "n";
-function sumAll(n){
- if(n==1) return 1;
- return n+sumAll(n-1);
+function sumAll(n) {
+   if (n == 1) return 1;
+   return n + sumAll(n - 1);
 }
-console.log("SummALL==>",sumAll(3))
+console.log("SummALL==>", sumAll(3))
 
 //Fibonacci Number Problem
-function fib(n){
-if(n==0) return 0;
-if(n==1) return 1;
-    return fib(n-1)+fib(n-2);
+function fib(n) {
+   if (n == 0) return 0;
+   if (n == 1) return 1;
+   return fib(n - 1) + fib(n - 2);
 }
 console.log(fib(4))
 
 //Check that an Array is sorted or Not 
-function sorted(arr,n){
-    if(n==0 || n==1) return true
-    return arr[n-1]>=arr[n-2] && sorted(arr,n-1);
+function sorted(arr, n) {
+   if (n == 0 || n == 1) return true
+   return arr[n - 1] >= arr[n - 2] && sorted(arr, n - 1);
 }
-console.log(sorted([1,2,4,5,6],5))
+console.log(sorted([1, 2, 4, 5, 6], 5))
 
 //Binary Search using Recursion 
-function binary(left,right,arr,target){
-    if(left>right) return -1
-    let mid=Math.floor((left+right)/2);
-    if(arr[mid]==target)return mid;
-    if(arr[mid]>target){
-        right=mid-1;
-        return binary(left,right,arr,target)
-    }
-    if(arr[mid]<target){
-        left=mid+1;
-        return binary(left,right,arr,target)
-    }
+function binary(left, right, arr, target) {
+   if (left > right) return -1
+   let mid = Math.floor((left + right) / 2);
+   if (arr[mid] == target) return mid;
+   if (arr[mid] > target) {
+      right = mid - 1;
+      return binary(left, right, arr, target)
+   }
+   if (arr[mid] < target) {
+      left = mid + 1;
+      return binary(left, right, arr, target)
+   }
 }
-let arr=[-1,0,3,5,9,12]
-console.log("Binay Search===>",binary(0,arr.length-1,arr,9))
+let arr = [-1, 0, 3, 5, 9, 12]
+console.log("Binay Search===>", binary(0, arr.length - 1, arr, 9))
 console.log("Git reset command test!");
 
 
@@ -58,19 +58,19 @@ console.log("Git reset command test!");
  * @param {number} x
  * @return {boolean}
  */
-var isPalindrome = function(x) {
-    let str= String(x)
-     let len = str.length;
-   function rev(s, n){
-        s += str[n]
-   if(n == 0){
-    return s
+var isPalindrome = function (x) {
+   let str = String(x)
+   let len = str.length;
+   function rev(s, n) {
+      s += str[n]
+      if (n == 0) {
+         return s
+      }
+      n--
+      return rev(s, n)
    }
-   n--
-return rev(s,n)
-   } 
-  let palin = rev('',len-1);
- return palin == str ? true : false
+   let palin = rev('', len - 1);
+   return palin == str ? true : false
 };
 
 
@@ -78,93 +78,118 @@ return rev(s,n)
  * @param {character[]} s
  * @return {void} Do not return anything, modify s in-place instead.
  */
-var reverseString = function(s) {
-    let len = s.length;
-    function rev(s, n,m){
-    if(n >= m){
-     return
-    }
-    [s[n] , s[m]]=[s[m] , s[n]];
-    m--;
-    n++
- return rev(s,n,m)
-    } 
-    rev(s,0,len-1);
-    return s
- };
-
-
- //Sum of N number 
-
- const sumN = function (N){
-    function count(n){
-      if(n > N){
-        return 0
+var reverseString = function (s) {
+   let len = s.length;
+   function rev(s, n, m) {
+      if (n >= m) {
+         return
       }
-     return n + count(n+1);
-    }
-   let totalSum= count(1);
+      [s[n], s[m]] = [s[m], s[n]];
+      m--;
+      n++
+      return rev(s, n, m)
+   }
+   rev(s, 0, len - 1);
+   return s
+};
+
+
+//Sum of N number 
+
+const sumN = function (N) {
+   function count(n) {
+      if (n > N) {
+         return 0
+      }
+      return n + count(n + 1);
+   }
+   let totalSum = count(1);
    console.log(totalSum)
    return totalSum
-  
-  }
- console.log(sumN(3))
+
+}
+console.log(sumN(3))
 
 
 
- const reverseArr = function (arr){
-    let len = arr.length;
-    function count(n,m){
-     if(n>=m){
-        return
-     }
-     [arr[n], arr[m]]=[arr[m],arr[n]];
-      count(++n,--m);
-    }
-      count(0 , len-1);
-   return arr
-  }
- console.log(reverseArr([1,2,3,4,5,6]))
-
-
- const palinDromCheck = function (str){
-    let len = str.length;
-    function count(n){
-     if(n < 0 ){
-        return true
-     }
-     if ( str[n] !== str[len-1-n] ) return false;
-      return count(--n);
-    }
-    return   count(len-1);
-  }
- console.log(palinDromCheck('-121'))
-
-
-//Level two , print the sub Sequnce sum equalll to k , only any one case to print 
- const PrintSequence = function (arr , k) {
-let len = arr.length;
-function printData(n,path,sum){
-   if(n>= len){
-      if( sum == k ){
-         console.log(path);
-         return true;
-      } 
-      return false;
+const reverseArr = function (arr) {
+   let len = arr.length;
+   function count(n, m) {
+      if (n >= m) {
+         return
+      }
+      [arr[n], arr[m]] = [arr[m], arr[n]];
+      count(++n, --m);
    }
-   sum += arr[n]
-path.push(arr[n]);
-if (printData(n+1,path,sum) == true){
-   return true
+   count(0, len - 1);
+   return arr
 }
-sum -= path[path.length -1]
-path.pop();
-if (printData(n+1,path,sum) == true){
-   return true
-}
-return false
-}
-printData(0,[],0);
- }
+console.log(reverseArr([1, 2, 3, 4, 5, 6]))
 
- PrintSequence([1,2,3] , 3)
+
+const palinDromCheck = function (str) {
+   let len = str.length;
+   function count(n) {
+      if (n < 0) {
+         return true
+      }
+      if (str[n] !== str[len - 1 - n]) return false;
+      return count(--n);
+   }
+   return count(len - 1);
+}
+console.log(palinDromCheck('-121'))
+
+
+//Level two , print the sub Sequnce sum equalll to k , only any one case to print  // Count now 
+const PrintSequence = function (arr, k) {
+   let len = arr.length;
+   function printData(n, path, sum) {
+      if (n >= len) {
+         if (sum == k) {
+            console.log(path);
+            return true;
+         }
+         return false;
+      }
+      sum += arr[n]
+      path.push(arr[n]);
+      if (printData(n + 1, path, sum) == true) {
+         return true
+      }
+      sum -= path[path.length - 1]
+      path.pop();
+      if (printData(n + 1, path, sum) == true) {
+         return true
+      }
+      return false
+   }
+   printData(0, [], 0);
+}
+
+PrintSequence([1, 2, 3], 3)
+
+
+// Count now 
+const PrintSequenceCount = function (arr, k) {
+   let len = arr.length;
+   function printData(n, path, sum ) {
+      if (n >= len) {
+         if (sum == k) {
+           return 1;
+         }
+         return 0
+      }
+      sum += arr[n]
+      path.push(arr[n]);
+     let l= printData(n + 1, path, sum)
+      sum -= path[path.length - 1]
+      path.pop();
+    let r=  printData(n + 1, path, sum)
+    return l+r
+   }
+  let countdata= printData(0, [], 0, 0);
+   console.log("count ======>",countdata)
+}
+
+PrintSequenceCount([1, 2, 3], 3)
