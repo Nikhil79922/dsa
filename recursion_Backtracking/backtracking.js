@@ -292,3 +292,67 @@ function mergeSort(arr) {
 }
 
 mergeSort([1, 3, 5, 7, 9, 3, 2, 5, 7, 1, 1, 1, 4, 7, 9])
+
+let n= 4
+let arr= new Array(n => new Array(n).fill('.'))
+console.log("rar=>",arr)
+
+
+//N-queue
+var solveNQueens = function (n) {
+  let board=  Array.from({ length: n }, () => new Array(n).fill('.'));
+  let ans=[];
+  let row = 0;
+  let col= 0
+ 
+  function solve(board , row ){
+     if(row == n){
+     ans.push(board.map(r => r.join('')));
+         return;
+     }
+     for(let i=0 ; i<n ; i++){
+         if(isSafe(board , row , i , n)){
+             board[row][i]='Q';
+             solve(board , row+1);
+             board[row][i]='.';
+         }
+     }
+  }
+ solve(board , 0 )
+ return ans
+ };
+ 
+ function isSafe(board , row , col , n){
+     if(row > n || col > n ) return false;
+ 
+     //veritical check
+     for(let i = row-1 ; i>=0 ; i--){
+         if(board[i][col] == "Q"){
+             return false;
+         }
+     }
+ 
+    //Diagonal right check
+    let right= row-1;
+    let left= col-1
+     for(let i = right ; i >= 0 ; i--){
+         if(left < 0) break;
+         if(board[i][left] == "Q"){
+             return false;
+         }
+         left--;
+     }
+ 
+       //Diagonal left check
+    let right2= row-1;
+    let left2= col+1
+     for(let i = right2 ; i >= 0 ; i--){
+         if(left2 > n) break;
+         if(board[i][left2] == "Q"){
+             return false;
+         }
+         left2++;
+     }
+ 
+     return true
+ }
