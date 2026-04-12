@@ -227,3 +227,23 @@ const reverseCount = function (N){
 
 }
 reverseCount(10)
+
+
+var permute = function (nums) {
+  let len = nums.length;
+  let arr = [];
+  function perm( i) {
+      if (i == len) {
+          arr.push([...nums]);
+          return;
+      };
+      for(let idx= i ; idx <len ; idx++){
+[nums[idx],nums[i]]=[nums[i],nums[idx]]
+          perm(i+1);
+          [nums[idx],nums[i]]=[nums[i],nums[idx]]
+      }
+  
+  }
+  perm(0)
+  return arr;
+};
