@@ -293,66 +293,146 @@ function mergeSort(arr) {
 
 mergeSort([1, 3, 5, 7, 9, 3, 2, 5, 7, 1, 1, 1, 4, 7, 9])
 
-let n= 4
-let arr= new Array(n => new Array(n).fill('.'))
-console.log("rar=>",arr)
+let n = 4
+let arr = new Array(n => new Array(n).fill('.'))
+console.log("rar=>", arr)
 
 
 //N-queue
 var solveNQueens = function (n) {
-  let board=  Array.from({ length: n }, () => new Array(n).fill('.'));
-  let ans=[];
+  let board = Array.from({ length: n }, () => new Array(n).fill('.'));
+  let ans = [];
   let row = 0;
-  let col= 0
- 
-  function solve(board , row ){
-     if(row == n){
-     ans.push(board.map(r => r.join('')));
-         return;
-     }
-     for(let i=0 ; i<n ; i++){
-         if(isSafe(board , row , i , n)){
-             board[row][i]='Q';
-             solve(board , row+1);
-             board[row][i]='.';
-         }
-     }
+  let col = 0
+
+  function solve(board, row) {
+    if (row == n) {
+      ans.push(board.map(r => r.join('')));
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      if (isSafe(board, row, i, n)) {
+        board[row][i] = 'Q';
+        solve(board, row + 1);
+        board[row][i] = '.';
+      }
+    }
   }
- solve(board , 0 )
- return ans
- };
- 
- function isSafe(board , row , col , n){
-     if(row > n || col > n ) return false;
- 
-     //veritical check
-     for(let i = row-1 ; i>=0 ; i--){
-         if(board[i][col] == "Q"){
-             return false;
+  solve(board, 0)
+  return ans
+};
+
+function isSafe(board, row, col, n) {
+  if (row > n || col > n) return false;
+
+  //veritical check
+  for (let i = row - 1; i >= 0; i--) {
+    if (board[i][col] == "Q") {
+      return false;
+    }
+  }
+
+  //Diagonal right check
+  let right = row - 1;
+  let left = col - 1
+  for (let i = right; i >= 0; i--) {
+    if (left < 0) break;
+    if (board[i][left] == "Q") {
+      return false;
+    }
+    left--;
+  }
+
+  //Diagonal left check
+  let right2 = row - 1;
+  let left2 = col + 1
+  for (let i = right2; i >= 0; i--) {
+    if (left2 > n) break;
+    if (board[i][left2] == "Q") {
+      return false;
+    }
+    left2++;
+  }
+
+  return true
+}
+
+
+
+//
+
+/**
+* @param {string} s
+* @return {string[][]}
+*/
+var partition = function (s) {
+  let ans = []
+  function isPalidrom(str) {
+    let rev = str.split('').reverse().join('');
+    if (rev == str) return true;
+    return false;
+  }
+  function allPossible(path, index) {
+    if (index == s.length) {
+      ans.push([...path]);
+      return;
+    }
+    for (let i = index; i < s.length; i++) {
+      let str = s.substring(index, i + 1)
+      if (isPalidrom(str)) {
+        path.push(str)
+        allPossible(path, i + 1);
+        path.pop();
+      }
+    }
+  }
+  allPossible([], 0)
+  return ans
+};
+
+
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+
+function isSafe(board, row, col, char) {
+  for (let i = 0; i < 9; i++) {
+
+      // row
+      if (board[row][i] == char) return false;
+
+      // col
+      if (board[i][col] == char) return false;
+
+      // 3x3 box
+      let r = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+      let c = 3 * Math.floor(col / 3) + (i % 3);
+
+      if (board[r][c] == char) return false;
+  }
+  return true;
+}
+
+function helper(board) {
+
+  for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+         if(board[i][j]=='.'){
+          for(let ch='1' ; ch<='9' ; ch++){
+              if(isSafe(board , i , j, ch)){
+                  board[i][j]=String(ch)
+                if (helper(board)) return true;
+                  board[i][j]='.'
+              }
+          }
+            return false; // no valid number
          }
-     }
- 
-    //Diagonal right check
-    let right= row-1;
-    let left= col-1
-     for(let i = right ; i >= 0 ; i--){
-         if(left < 0) break;
-         if(board[i][left] == "Q"){
-             return false;
-         }
-         left--;
-     }
- 
-       //Diagonal left check
-    let right2= row-1;
-    let left2= col+1
-     for(let i = right2 ; i >= 0 ; i--){
-         if(left2 > n) break;
-         if(board[i][left2] == "Q"){
-             return false;
-         }
-         left2++;
-     }
- 
-     return true
- }
+      }
+  }
+  return true
+}
+
+var solveSudoku = function (board) {
+   helper(board)
+};
