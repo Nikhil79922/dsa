@@ -202,7 +202,6 @@ function mergeSortPractice (arr){
       let mid= Math.floor((low + high)/2);
       mergeSort(arr, low , mid);
       mergeSort(arr , mid+1 , high);
-         
    }
 
    function merge(arr , low , mid , high){
