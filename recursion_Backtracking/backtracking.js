@@ -436,3 +436,37 @@ function helper(board) {
 var solveSudoku = function (board) {
    helper(board)
 };
+
+
+
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+
+var check = function (board, word, row, col, exptIndex) {
+  if (row >= board.length || col >= board[0].length || row < 0 || col < 0 || board[row][col] !== word[exptIndex]) {
+      return false;
+  }
+  if (exptIndex == word.length - 1) {
+      return true;
+  }
+
+let temp= board[row][col];
+board[row][col]= '#'
+  let found = check(board, word, row - 1, col, exptIndex + 1) || check(board, word, row + 1, col, exptIndex + 1) || check(board, word, row, col - 1, exptIndex + 1) || check(board, word, row, col + 1, exptIndex + 1)
+board[row][col]= temp
+
+  return found;
+}
+
+var exist = function (board, word) {
+  for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+          if (check(board, word, i, j, 0)) return true
+      }
+  }
+  return false;
+};
+
