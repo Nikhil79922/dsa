@@ -506,3 +506,37 @@ function  graphColoring(V, edges, M){
    const colors= new Array(V).fill(0);
    return dfs(0,colors);
   }
+
+
+//Rat in a maze
+  /**
+ * @param {number[][]} mat
+ * @returns {string[]}
+ */
+class Solution {
+  ratInMaze(maze) {
+    let ans=[];
+    
+    if(maze[0][0]==0)return ans;
+    if (maze[maze.length - 1][maze.length - 1] === 0) return ans;
+    function dfs( row , col , path ){
+
+if(row < 0 || col < 0 || row >= maze.length || col >= maze.length || maze[row][col]==0){
+  return ;
+}
+
+        if (row === maze.length - 1 && col === maze.length - 1){
+  ans.push(path)
+  return;
+}
+maze[row][col]=0;
+dfs(row + 1, col, path + 'D');
+dfs(row, col - 1, path + 'L');
+dfs(row, col + 1, path + 'R');
+dfs(row - 1, col, path + 'U');
+maze[row][col]=1;
+    }
+      dfs(0,0,'');
+      return ans;
+  }
+}
