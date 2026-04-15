@@ -470,3 +470,39 @@ var exist = function (board, word) {
   return false;
 };
 
+
+
+
+// Practice M-Coloring Problem
+function  graphColoring(V, edges, M){
+
+  let adj = Array.from({length:V},()=>[]);
+  for(let [u,w] of edges){
+      adj[u].push(w);
+      adj[w].push(u);
+  }
+  
+   function safeVertex(node , colors , color){
+       for(let neighbour of adj[node]){
+           if(colors[neighbour]==color) return false;
+       }
+       return true;
+   }
+   
+   function dfs(node,colors){
+       if(node == V){
+           return true;
+       }
+       
+       for(let color=1 ;color <= M ; color++){
+           if(safeVertex(node, colors , color)){
+               colors[node]=color;
+          if(dfs(node+1 , colors)) return true
+          colors[node] = 0;
+           }
+       }
+       return false;
+   }
+   const colors= new Array(V).fill(0);
+   return dfs(0,colors);
+  }
