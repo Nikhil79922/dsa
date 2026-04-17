@@ -470,9 +470,6 @@ var exist = function (board, word) {
   return false;
 };
 
-
-
-
 // Practice M-Coloring Problem
 function  graphColoring(V, edges, M){
 
