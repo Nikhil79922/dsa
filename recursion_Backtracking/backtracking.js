@@ -537,3 +537,49 @@ maze[row][col]=1;
       return ans;
   }
 }
+
+
+
+// Quick Sort 
+function quickySort(arr){
+
+  function sorty(arr, low , high){
+    if(low >= high) return;
+
+    let partitionIndex = sortIndex(arr, low, high);
+
+    sorty(arr, low, partitionIndex - 1);
+    sorty(arr, partitionIndex + 1, high);
+  }
+
+  function sortIndex(arr, low , high){
+    let pivot = arr[low];
+    let i = low + 1;
+    let j = high;
+
+    while(true){
+      while(i <= high && arr[i] <= pivot){
+        i++;
+      }
+
+      while(j >= low && arr[j] > pivot){
+        j--;
+      }
+
+      if(i >= j) break;
+
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+
+    [arr[low], arr[j]] = [arr[j], arr[low]];
+    return j;
+  }
+
+  // optional: remove undefined/null
+  arr = arr.filter(x => x !== undefined && x !== null);
+
+  sorty(arr, 0, arr.length - 1);
+  return arr;
+}
+
+console.log("quickySort==========>", quickySort([1,2,9,3,1,,9,4]));

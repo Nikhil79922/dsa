@@ -22,3 +22,5 @@ fact =fact/nums.length;
 
     return ans;
 };
+
+
