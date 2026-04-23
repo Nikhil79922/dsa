@@ -583,3 +583,64 @@ function quickySort(arr){
 }
 
 console.log("quickySort==========>", quickySort([1,2,9,3,1,,9,4]));
+
+
+
+function reversePairs(arr) {
+   return mergeSortCI(arr,0,arr.length-1);
+}
+
+function mergeSortCI(arr,low,high){
+  let inversion=0
+  if(low>=high){
+    return;
+  }
+  let mid= Math.floor((low+high)/2);
+  inversion += mergeSortCI(arr,low,mid);
+  inversion += mergeSortCI(arr,mid+1,high);
+  inversion += countInv(arr,low,mid,high)
+ mergey(arr,low,mid,high);
+  return inversion; 
+}
+
+function countInv(arr, low , mid , high){
+  let count=0;
+let right= mid+1;
+for(let left =low ; left <=mid ; left ++){
+  while(right<=high && arr[left]> 2* arr[right]){
+    right++;
+  }
+  count += right - (mid + 1);
+}
+return count
+}
+
+function mergey(arr, low , mid ,high ){
+  let temp=[];
+  let left= low;
+  let right =mid+1;
+
+  while(left<= mid && right <= high){
+    if(arr[left] <= arr[right]){
+      temp.push(arr[left]);
+      left++;
+    }else{
+      temp.push(arr[right]);
+      right++;
+    }
+  }
+
+  while(left<=mid){
+    temp.push(arr[left]);
+    left++;
+  }
+  while(right<=high){
+    temp.push(arr[right]);
+    right++;
+  }
+
+  for(let i= low ; i<=high ; i++){
+    arr[i]=temp[i-low];
+  }
+  return inversion;
+}
