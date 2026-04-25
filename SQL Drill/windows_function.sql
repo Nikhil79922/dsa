@@ -41,3 +41,94 @@ SELECT  fname , lname , dept , salary, COALESCE(salary - LEAD(salary) OVER(ORDER
 		   FROM employees
 		) AS t
 		WHERE rnk <= 3;
+
+-- Pattern 2 :- 
+-- 🔥 PATTERN 2: Deduplication (REAL INTERVIEW QUESTION)
+-- 🧠 Full Question
+
+-- You have a table:
+
+-- users (
+--   user_id INT,
+--   email VARCHAR,
+--   name VARCHAR,
+--   created_at TIMESTAMP
+-- )
+
+--  Due to a bug, duplicate users were created.
+
+--  Task
+
+-- Return only one record per email, keeping the latest created record.
+
+-- ⚠️ Constraints (important)
+-- Multiple rows can have same email
+-- You must keep the most recent one
+-- No data loss except duplicates
+
+SELECT * FROM (
+    SELECT * , ROW_NUMBER() OVER(PARTITION BY EMAIL ORDER BY created_at DESC) AS unique_email FROM users
+) AS t WHERE unique_email = 1;
+
+
+
+-- 🔥 PATTERN 3: Running Total (VERY COMMON)
+-- 🧠 Full Question
+
+-- You have a table:
+
+-- sales (
+--   order_id INT,
+--   order_date DATE,
+--   amount NUMERIC
+-- )
+-- 🎯 Task
+
+-- Return each order with a running total of sales based on order_date.
+
+-- ⚠️ Important
+-- Running total = cumulative sum
+-- Ordered by date
+-- Each row should include sum of all previous + current
+
+SELECT 
+  order_id,
+  order_date,
+  amount,
+  SUM(amount) OVER (
+    ORDER BY order_date
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS running_total
+FROM sales;
+
+
+
+-- 🔥 PATTERN 4: Previous vs Current (LAG / LEAD)
+-- 🧠 Full Question
+
+-- You have a table:
+
+-- employees (
+--   emp_id INT,
+--   salary NUMERIC
+-- )
+-- 🎯 Task
+
+-- For each employee, show:
+
+-- current salary
+-- previous employee’s salary
+-- difference between them
+
+SELECT 
+  emp_id,
+  salary,
+  prev_salary,
+  salary - prev_salary AS diff
+FROM (
+  SELECT 
+    emp_id,
+    salary,
+    LAG(salary) OVER (ORDER BY emp_id) AS prev_salary
+  FROM employees
+) AS salary_with_prev;
