@@ -28,3 +28,16 @@ SELECT  fname , lname , dept , salary, COALESCE(salary - LEAD(salary) OVER(ORDER
 
    SELECT  fname , lname , dept , salary , FIRST_VALUE(salary) OVER(PARTITION BY dept ORDER BY salary DESC)
    FROM employees;
+
+
+
+     -- Window Function Pattern 1 :- 🔥 PATTERN 1: Top N per Group (MOST IMPORTANT)
+        --🧠 Problem :- “Get top 3 highest paid employees per department”
+
+		SELECT * FROM 
+		(
+          SELECT *, DENSE_RANK() 
+		   OVER(PARTITION BY dept ORDER BY salary DESC) AS rnk
+		   FROM employees
+		) AS t
+		WHERE rnk <= 3;
