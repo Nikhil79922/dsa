@@ -206,3 +206,78 @@ FROM (
     ON e.dept_id = d.dept_id
 ) t
 WHERE rnk <= 2;
+
+
+-- 🔥 PATTERN 7: Conditional Ranking / Filtering (INTERVIEW TRAP)
+-- 🧠 Full Question
+
+-- You have:
+
+-- employees (
+--   emp_id INT,
+--   dept_id INT,
+--   salary NUMERIC,
+--   status VARCHAR  -- 'active' or 'inactive'
+-- )
+-- 🎯 Task
+
+-- Get top 2 highest paid ACTIVE employees per department
+
+SELECT 
+emp_id , dept_id , salary , status 
+FROM (
+  SELECT 
+   emp_id , dept_id , salary , status , DENSE_RANK () OVER(
+    PARTITION BY dept_id 
+    ORDER BY salary DESC 
+   ) AS rnk FROM employees
+   WHERE status = 'active'
+) t
+WHERE rnk <= 2;
+
+-- 🔥 FINAL INTERVIEW QUESTION
+
+-- You have a table:
+
+-- transactions (
+--   user_id INT,
+--   txn_date DATE,
+--   amount NUMERIC
+-- )
+-- 🎯 Task
+
+-- For each user, find the longest streak of consecutive transaction days
+
+-- 👉 Output:
+
+-- user_id
+-- streak_length (max consecutive days)
+-- 🧠 Example
+-- user_id	txn_date
+-- 1	2024-01-01
+-- 1	2024-01-02
+-- 1	2024-01-03
+-- 1	2024-01-05
+
+
+SELECT 
+  user_id,
+  MAX(streak_length) AS streak_length
+FROM (
+  SELECT 
+    user_id,
+    COUNT(*) AS streak_length
+  FROM (
+    SELECT 
+      user_id,
+      txn_date,
+      txn_date - INTERVAL '1 day' * 
+        ROW_NUMBER() OVER (
+          PARTITION BY user_id 
+          ORDER BY txn_date
+        ) AS grp
+    FROM transactions
+  ) t
+  GROUP BY user_id, grp
+) s
+GROUP BY user_id;
