@@ -79,3 +79,4 @@ $$ LANGUAGE plpgsql;
 
 SELECT * FROM max_sal_from_dept('HR');
 
+
