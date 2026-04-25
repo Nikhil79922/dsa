@@ -281,3 +281,30 @@ FROM (
   GROUP BY user_id, grp
 ) s
 GROUP BY user_id;
+
+
+-- Alright. Final chance. No hints. No retries. Clear YES/NO.
+
+-- 🔥 FINAL QUESTION
+
+-- You have a table:
+
+-- orders (
+--   order_id INT,
+--   user_id INT,
+--   order_date DATE,
+--   amount NUMERIC
+-- )
+-- 🎯 Task
+
+-- For each user, return the date of their 3rd order
+
+SELECT 
+user_id,
+order_date
+ FROM (
+    SELECT user_id, order_date , ROW_NUMBER() OVER(
+        PARTITION BY user_id 
+        ORDER BY order_date 
+    ) AS rnk FROM orders
+) AS t WHERE rnk = 3 ; 
