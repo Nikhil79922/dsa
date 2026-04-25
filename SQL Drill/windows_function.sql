@@ -132,3 +132,77 @@ FROM (
     LAG(salary) OVER (ORDER BY emp_id) AS prev_salary
   FROM employees
 ) AS salary_with_prev;
+
+
+-- 🔥 PATTERN 5: Gap & Island (Consecutive Records)
+-- 🧠 Full Question
+
+-- You have a table:
+
+-- logins (
+--   user_id INT,
+--   login_date DATE
+-- )
+-- 🎯 Task
+
+-- Find continuous login streaks for each user
+-- 👉 Return:
+
+-- user_id
+-- start_date
+-- end_date
+
+SELECT user_id , MIN(login_date) AS start_date , MAX(login_date) AS end_date FROM (
+    SELECT 
+    user_id,
+    login_date,
+    login_date - INTERVAL '1 day' * ROW_NUMBER() OVER(
+        PARTITION BY user_id  ORDER BY login_date
+    ) AS grp FROM logins
+) AS t
+GROUP BY user_id , grp
+ORDER BY user_id , start_date
+
+-- 🔥 PATTERN 6: Top N + JOIN (Production-Level)
+-- 🧠 Full Question
+
+-- You have two tables:
+
+-- employees (
+--   emp_id INT,
+--   name VARCHAR,
+--   dept_id INT,
+--   salary NUMERIC
+-- )
+
+-- departments (
+--   dept_id INT,
+--   dept_name VARCHAR
+-- )
+-- 🎯 Task
+
+-- Get top 2 highest paid employees in each department,
+-- 👉 along with:
+
+-- employee name
+-- department name
+-- salary
+
+SELECT 
+  name,
+  dept_name,
+  salary
+FROM (
+  SELECT 
+    e.name,
+    d.dept_name,
+    e.salary,
+    DENSE_RANK() OVER (
+      PARTITION BY e.dept_id 
+      ORDER BY e.salary DESC
+    ) AS rnk
+  FROM employees e
+  JOIN departments d
+    ON e.dept_id = d.dept_id
+) t
+WHERE rnk <= 2;
