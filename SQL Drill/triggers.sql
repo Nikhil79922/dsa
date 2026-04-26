@@ -93,22 +93,37 @@ EXECUTE FUNCTION insert_sal_log();
 
 
 
-
--- 🔥 FINAL QUESTION (Mix of everything)
+-- 🔥 FINAL TRIGGER QUESTION (DO OR DIE)
+-- 🧠 Scenario
 
 -- You have a table:
 
 -- orders (
 --   order_id INT,
 --   user_id INT,
---   order_date DATE,
 --   amount NUMERIC
 -- )
 -- 🎯 Task
 
--- For each user, return:
+-- Whenever a new order is inserted:
 
--- user_id
--- total number of orders
--- total amount spent
--- date of their latest order
+-- 👉 If amount <= 0
+-- ➡️ Reject the insert with an error
+
+-- 👉 Else
+-- ➡️ Allow insert normally
+CREATE OR REPLACE FUNCTION safe_amount()
+RETURNS TRIGGER
+AS $$
+BEGIN 
+  IF NEW.amount <= 0 THEN 
+    RAISE EXCEPTION 'Cannot insert non-positive amount';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER safe_amount_entries_alert
+BEFORE INSERT ON orders
+FOR EACH ROW 
+EXECUTE FUNCTION safe_amount();
