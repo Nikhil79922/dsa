@@ -127,3 +127,5 @@ CREATE TRIGGER safe_amount_entries_alert
 BEFORE INSERT ON orders
 FOR EACH ROW 
 EXECUTE FUNCTION safe_amount();
+
+
