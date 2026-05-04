@@ -6,7 +6,7 @@ var MyStack = function () {
 };
 
 /** 
- * @param {number} x
+ * @param {number} 
  * @return {void}
  */
 MyStack.prototype.push = function (x) {
