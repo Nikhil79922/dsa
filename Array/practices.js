@@ -911,3 +911,25 @@ var productExceptSelf = function (nums) {
   }
   return prefix;
   };
+
+  /**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function (strs) {
+    let map = new Map();
+    for (let i = 0; i < strs.length; i++) {
+        let freq = new Array(26).fill(0);
+        for (let ch of strs[i]) {
+            freq[ch.charCodeAt() - 97]++;
+        }
+
+        let key = freq.join('#');
+        if (map.has(key)) {
+             map.get(key).push(strs[i]);
+        } else {
+            map.set(key, [strs[i]])
+        }
+    }
+return Array.from(map.values());
+};
