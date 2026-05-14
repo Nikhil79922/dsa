@@ -1,5 +1,3 @@
-
-
 /**
  * @param {string} text1
  * @param {string} text2
