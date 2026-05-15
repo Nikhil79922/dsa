@@ -11,17 +11,12 @@ var longestCommonSubsequence = function (text1, text2) {
 };
 
 function findSubsequences(i, j, t1, t2, dp) {
-    // base case
     if (i < 0 || j < 0) return 0;
 
     if (dp[i][j] !== -1) return dp[i][j];
-
-    // match
     if (t1[i] === t2[j]) {
         return dp[i][j] = 1 + findSubsequences(i - 1, j - 1, t1, t2, dp);
     }
-
-    // not match
     return dp[i][j] = Math.max(
         findSubsequences(i, j - 1, t1, t2, dp),
         findSubsequences(i - 1, j, t1, t2, dp)
