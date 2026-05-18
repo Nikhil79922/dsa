@@ -51,3 +51,29 @@ console.log(minLen === Infinity
  };
 
  minWindow("ADOBECODEBANC","ABC")
+
+
+ //Longest Palindromic Substring
+ var longestPalindrome = function (s) {
+    let n = s.length;
+    let sIndex = 0;
+    let maxLen = 1;
+    if (n < 2) return s;
+    function expands(left, right) {
+        while (left >= 0 && right < n && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        let len = right - left - 1;
+        if (len > maxLen){
+            sIndex= left + 1;
+            maxLen= len;
+        }
+    }
+
+    for(let i = 0; i<n ; i++){
+        expands(i,i);
+        expands(i,i+1);
+    }
+    return s.substring(sIndex, sIndex+maxLen)
+};
