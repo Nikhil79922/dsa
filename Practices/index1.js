@@ -77,3 +77,45 @@ console.log(minLen === Infinity
     }
     return s.substring(sIndex, sIndex+maxLen)
 };
+
+
+var myAtoi = function (s) {
+    let i = 0;
+    let sign = 1;
+    let num = 0;
+    let INT_MAX = (2 ** 31 - 1);
+    let INT_MIN = -(2 ** 31);
+
+    //Step 1
+    while (s[i] == ' ') {
+        i++;
+    }
+
+    // Step 2
+    if (s[i] == '-') {
+        sign = -1;
+        i++;
+    }
+    else if (s[i] == '+') {
+        i++;
+    }
+
+
+    while (i < s.length && s[i] >= '0' && s[i] <= '9') {
+        let digit = s[i] - '0';
+
+        //step 3
+        num = num * 10 + digit;
+
+        //Step 4
+        if (sign * num > INT_MAX) {
+            return INT_MAX
+        }
+        if (sign * num < INT_MIN) {
+            return INT_MIN;
+        }
+
+i++;
+    }
+    return sign * num;
+};
