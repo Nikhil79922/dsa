@@ -1,14 +1,6 @@
 SELECT * FROM employees ;
 
-
-CREATE PROCEDURE update_salray_on_empID (pSalary NUMERIC , pEmpId INT)
-LANGUAGE plpgsql
-AS $$
-BEGIN 
-UPDATE employees
-SET salary = pSalary WHERE emp_id = pEmpId;
-END;
-$$;
+ 
 
 CREATE PROCEDURE insert_new_emp (
    pFname VARCHAR(200),
@@ -80,3 +72,49 @@ $$ LANGUAGE plpgsql;
 SELECT * FROM max_sal_from_dept('HR');
 
 
+
+-- Min salary Pratice user define function 
+
+CREATE OR REPLACE FUNCTION min_sal_from_dept( u_dept VARCHAR(100) )
+RETURNS TABLE(
+  emp_id INT,
+  fname VARCHAR(100),
+  lname VARCHAR(100),
+  email VARCHAR(100),
+  dept VARCHAR(100),
+  salary NUMERIC(10,2)
+)
+AS $$
+BEGIN 
+RETURN QUERY 
+SELECT e.emp_id , e.fname , e.lname , e.email , e.dept , e.salary FROM employees as e 
+WHERE e.dept = u_dept AND e.salary=(
+SELECT MIN(emp.salary) from employees as emp WHERE emp.dept = u_dept
+);
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM min_sal_from_dept('HR');
+
+
+CREATE OR REPLACE FUNCTION emp_above_avg_salary( u_dept VARCHAR(100) )
+RETURNS TABLE(
+  emp_id INT,
+  fname VARCHAR(100),
+  lname VARCHAR(100),
+  email VARCHAR(100),
+  dept VARCHAR(100),
+  salary NUMERIC(10,2)
+)
+AS $$
+BEGIN 
+RETURN QUERY 
+SELECT e.emp_id , e.fname , e.lname , e.email , e.dept , e.salary FROM employees as e 
+WHERE e.dept = u_dept AND e.salary > (
+SELECT AVG(emp.salary) from employees as emp WHERE emp.dept = u_dept
+);
+END;
+$$ LANGUAGE plpgsql;
+
+
+SELECT * FROM emp_above_avg_salary('HR');
