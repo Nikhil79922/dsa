@@ -213,3 +213,41 @@ var singleNonDuplicate = function (nums) {
 
     return -1
 };
+
+
+
+//Allocate book.    
+class Solution {
+	findPages(arr, k) {
+		let n = arr.length;
+		if (n<k) return - 1;
+		let high = arr.reduce((acc, curr) => acc + curr, 0);
+		
+		let low = Math.max(...arr);
+		while (low <= high) {
+			let mid = Math.floor((low + high)/2);
+			let student = this.countStudent(arr,mid);
+			if(student > k){
+			    low=mid+1;
+			}else{
+			    high=mid-1;
+			}
+		}
+		
+		return low;
+		
+	}
+	
+	countStudent(arr, mid){
+	    let student=1 ; let page=0;
+	    for(let i = 0 ; i<arr.length ;i++){
+	        if(page + arr[i] <= mid){
+	            page +=arr[i];
+	        }else{
+	            student ++;
+	            page =arr[i]
+	        }
+	    }
+	    return student;
+	}
+}
