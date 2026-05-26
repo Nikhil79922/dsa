@@ -251,3 +251,38 @@ class Solution {
 	    return student;
 	}
 }
+
+
+//Cow Aggregations 
+var cowDistance=(nums , C)=>{
+  nums.sort((a,b)=>(a-b))
+let n = nums.length;
+let low = nums[0];
+let high= nums[n-1] - nums[0];
+while(low <= high){
+    let mid= Math.floor((low+high)/2);
+    if(isValid(nums,mid,C)){
+        low=mid+1;
+    }else{
+        high=mid-1;
+    }
+}  
+return high
+}
+
+var isValid=(nums , mid , C )=>{
+   let cow = 1 ; let last = nums[0];
+   for(let i = 1 ; i<nums.length ; i++){
+    if (nums[i] - last >= mid) {
+        cow++;
+        last = nums[i];
+    }
+
+    if (cow >= C) {
+        return true;
+    }
+   }
+   return false
+}
+
+console.log("Max distance for the minimum cow distance placement",cowDistance([0,3,4,7,10,9],4));
