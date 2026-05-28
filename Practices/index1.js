@@ -2,59 +2,59 @@
 // Input: s = "ADOBECODEBANC", t = "ABC"
 // Output: "BANC"
 
-var minWindow = function(s, t) {
+var minWindow = function (s, t) {
     let m = s.length;
     let n = t.length;
-    let map= new Map();
-    for(let ch of t){
-        map.set(ch , (map.get(ch) || 0) +1);
+    let map = new Map();
+    for (let ch of t) {
+        map.set(ch, (map.get(ch) || 0) + 1);
     }
-let sIndex=-1;
-let l=0;
-let r=0;
-let minLen= Infinity;
-let count=t.length;
+    let sIndex = -1;
+    let l = 0;
+    let r = 0;
+    let minLen = Infinity;
+    let count = t.length;
 
-while(r<m){
-    
-    if(map.has(s[r])){
-        if(map.get(s[r]) > 0){
-            count--;
-        }
-        map.set(s[r], (map.get(s[r])-1))
-    }
+    while (r < m) {
 
-    while(count === 0){
-
-        if(r-l+1 <minLen){
-            minLen= r-l+1;
-            sIndex =l;
-        }
-        
-        //Shrink untill snallest window is not found. 
-        if(map.has(s[l]) ){
-            map.set(s[l], (map.get(s[l])+1))
-
-            if(map.get(s[l]) >  0){
-                count++;
+        if (map.has(s[r])) {
+            if (map.get(s[r]) > 0) {
+                count--;
             }
+            map.set(s[r], (map.get(s[r]) - 1))
         }
-        l++;
+
+        while (count === 0) {
+
+            if (r - l + 1 < minLen) {
+                minLen = r - l + 1;
+                sIndex = l;
+            }
+
+            //Shrink untill snallest window is not found. 
+            if (map.has(s[l])) {
+                map.set(s[l], (map.get(s[l]) + 1))
+
+                if (map.get(s[l]) > 0) {
+                    count++;
+                }
+            }
+            l++;
+        }
+        r++;
     }
-    r++;
-}
 
-console.log(sIndex,minLen);
-console.log(minLen === Infinity
-    ? ""
-    : s.substring(sIndex, sIndex + minLen))
- };
+    console.log(sIndex, minLen);
+    console.log(minLen === Infinity
+        ? ""
+        : s.substring(sIndex, sIndex + minLen))
+};
 
- minWindow("ADOBECODEBANC","ABC")
+minWindow("ADOBECODEBANC", "ABC")
 
 
- //Longest Palindromic Substring
- var longestPalindrome = function (s) {
+//Longest Palindromic Substring
+var longestPalindrome = function (s) {
     let n = s.length;
     let sIndex = 0;
     let maxLen = 1;
@@ -65,17 +65,17 @@ console.log(minLen === Infinity
             right++;
         }
         let len = right - left - 1;
-        if (len > maxLen){
-            sIndex= left + 1;
-            maxLen= len;
+        if (len > maxLen) {
+            sIndex = left + 1;
+            maxLen = len;
         }
     }
 
-    for(let i = 0; i<n ; i++){
-        expands(i,i);
-        expands(i,i+1);
+    for (let i = 0; i < n; i++) {
+        expands(i, i);
+        expands(i, i + 1);
     }
-    return s.substring(sIndex, sIndex+maxLen)
+    return s.substring(sIndex, sIndex + maxLen)
 };
 
 
@@ -115,7 +115,7 @@ var myAtoi = function (s) {
             return INT_MIN;
         }
 
-i++;
+        i++;
     }
     return sign * num;
 };
@@ -126,57 +126,57 @@ i++;
  * @param {number} target
  * @return {number}
  */
-var search = function(nums, target) {
+var search = function (nums, target) {
     let n = nums.length;
     let left = 0;
-    let right= n-1;
-    while(left <= right){
-      let mid = Math.floor((left+right)/2);
-      if(nums[mid] == target) return mid;
-      if(nums[left]<=nums[mid]){
-  
-  if(nums[left] <= target && nums[mid] > target){
-      right = mid - 1;
-  }else{
-            left= mid+1;
-  }
-      }
-  else{
-      if(nums[mid] < target && nums[right] >= target){
-          left= mid+1;
-      }else{
-          right = mid -1;
-      }
-  }
+    let right = n - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (nums[mid] == target) return mid;
+        if (nums[left] <= nums[mid]) {
+
+            if (nums[left] <= target && nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        else {
+            if (nums[mid] < target && nums[right] >= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
     }
-  
+
     return -1;
-  };
+};
 
 
-  /**
- * @param {number[]} arr
- * @return {number}
- */
+/**
+* @param {number[]} arr
+* @return {number}
+*/
 
-var peakIndexInMountainArray = function(arr) {
-    let n= arr.length;
-    let left= 0;
-    let right = n-1;
-    while(left <= right){
-     let mid= Math.floor((left + right)/2);
-     if(arr[mid-1] < arr[mid] && arr[mid] > arr[mid+1]){
-         return mid;
-     }
-     if(arr[mid] < arr[mid +1]){
-         left = mid + 1;
-     }else if( arr[mid] > arr[mid+1]){
-         right = mid - 1;
-     }
+var peakIndexInMountainArray = function (arr) {
+    let n = arr.length;
+    let left = 0;
+    let right = n - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1]) {
+            return mid;
+        }
+        if (arr[mid] < arr[mid + 1]) {
+            left = mid + 1;
+        } else if (arr[mid] > arr[mid + 1]) {
+            right = mid - 1;
+        }
     }
- 
+
     return -1;
- };
+};
 
 /**
  * @param {number[]} nums
@@ -218,111 +218,149 @@ var singleNonDuplicate = function (nums) {
 
 //Allocate book.    
 class Solution {
-	findPages(arr, k) {
-		let n = arr.length;
-		if (n<k) return - 1;
-		let high = arr.reduce((acc, curr) => acc + curr, 0);
-		
-		let low = Math.max(...arr);
-		while (low <= high) {
-			let mid = Math.floor((low + high)/2);
-			let student = this.countStudent(arr,mid);
-			if(student > k){
-			    low=mid+1;
-			}else{
-			    high=mid-1;
-			}
-		}
-		
-		return low;
-		
-	}
-	
-	countStudent(arr, mid){
-	    let student=1 ; let page=0;
-	    for(let i = 0 ; i<arr.length ;i++){
-	        if(page + arr[i] <= mid){
-	            page +=arr[i];
-	        }else{
-	            student ++;
-	            page =arr[i]
-	        }
-	    }
-	    return student;
-	}
+    findPages(arr, k) {
+        let n = arr.length;
+        if (n < k) return - 1;
+        let high = arr.reduce((acc, curr) => acc + curr, 0);
+
+        let low = Math.max(...arr);
+        while (low <= high) {
+            let mid = Math.floor((low + high) / 2);
+            let student = this.countStudent(arr, mid);
+            if (student > k) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return low;
+
+    }
+
+    countStudent(arr, mid) {
+        let student = 1; let page = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (page + arr[i] <= mid) {
+                page += arr[i];
+            } else {
+                student++;
+                page = arr[i]
+            }
+        }
+        return student;
+    }
 }
 
 
 //Cow Aggregations 
-var cowDistance=(nums , C)=>{
-  nums.sort((a,b)=>(a-b))
-let n = nums.length;
-let low = nums[0];
-let high= nums[n-1] - nums[0];
-while(low <= high){
-    let mid= Math.floor((low+high)/2);
-    if(isValid(nums,mid,C)){
-        low=mid+1;
-    }else{
-        high=mid-1;
+var cowDistance = (nums, C) => {
+    nums.sort((a, b) => (a - b))
+    let n = nums.length;
+    let low = nums[0];
+    let high = nums[n - 1] - nums[0];
+    while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+        if (isValid(nums, mid, C)) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
     }
-}  
-return high
+    return high
 }
 
-var isValid=(nums , mid , C )=>{
-   let cow = 1 ; let last = nums[0];
-   for(let i = 1 ; i<nums.length ; i++){
-    if (nums[i] - last >= mid) {
-        cow++;
-        last = nums[i];
-    }
+var isValid = (nums, mid, C) => {
+    let cow = 1; let last = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] - last >= mid) {
+            cow++;
+            last = nums[i];
+        }
 
-    if (cow >= C) {
-        return true;
+        if (cow >= C) {
+            return true;
+        }
     }
-   }
-   return false
+    return false
 }
 
-console.log("Max distance for the minimum cow distance placement",cowDistance([0,3,4,7,10,9],4));
+console.log("Max distance for the minimum cow distance placement", cowDistance([0, 3, 4, 7, 10, 9], 4));
 
 
 class Solution {
-	findPages(arr, k) {
-	let n = arr.length;
-	if(k > n) return -1;
-	let low = Math.max(...arr);
-	let high = arr.reduce((sum,item)=> sum+item , 0)
-	
-	while(low<=high){
-	    let mid=Math.floor((low+high)/2);
-	    let students=this.countStudent(arr,mid , k);
-	    if(students > k){
-	        low= mid+1;
-	    }else{
-	        high = mid-1;
-	    }
-	}
-	return low;
-		
-	}
-	
-	countStudent(arr, mid , k){
-	 let students = 1 ;
-	 let lastCount = 0 ;
-	 for(let i = 0 ; i< arr.length ; i++){
-	     if((arr[i] + lastCount ) <= mid){
-	         lastCount += arr[i];
-	     }else{
-	         students++;
-	         lastCount = arr[i];
-	     }
-	     
-	     if(students > k){
-	         return students
-	     }
-	 }
-	 return students;
-	}
+    findPages(arr, k) {
+        let n = arr.length;
+        if (k > n) return -1;
+        let low = Math.max(...arr);
+        let high = arr.reduce((sum, item) => sum + item, 0)
+
+        while (low <= high) {
+            let mid = Math.floor((low + high) / 2);
+            let students = this.countStudent(arr, mid, k);
+            if (students > k) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+
+    }
+
+    countStudent(arr, mid, k) {
+        let students = 1;
+        let lastCount = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if ((arr[i] + lastCount) <= mid) {
+                lastCount += arr[i];
+            } else {
+                students++;
+                lastCount = arr[i];
+            }
+
+            if (students > k) {
+                return students
+            }
+        }
+        return students;
+    }
+}
+
+
+
+//Cow aggregation 
+
+var cowDistance = (nums, C) => {
+    let n = nums.length;
+    if (C > n) return -1;
+    nums.sort((a, b) => (a - b));
+    let low = nums[0];
+    let high = nums[n - 1] - nums[0];
+
+    while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+        if(isValid(nums,mid,C)){
+low = mid+1
+        }else{
+            high=mid-1;
+        }
+    }
+
+    return high
+}
+
+var isValid = (nums, mid, C) => {
+let cows = 1;
+let lastgap =nums[0];
+for(let i = 1 ; i<nums.length ; i++){
+    if(nums[i] - lastgap >= mid){
+        cows++;
+        lastgap=nums[i];
+    }
+    if(cows>=C){
+        return true
+    }
+}
+return false;
 }
