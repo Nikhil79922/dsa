@@ -111,12 +111,9 @@ SELECT * FROM (
 -- Ordered by date
 -- Each row should include sum of all previous + current
 
-
-
-
-
-
-
+SELECT * FROM (
+  SELECT * , SUM(s.amount) OVER( ORDER BY order_date) running_total FROM sales AS s
+) as t;
 
 
 SELECT 
@@ -147,6 +144,12 @@ FROM sales;
 -- current salary
 -- previous employee’s salary
 -- difference between them
+
+SELECT * , t.salary-t.PES AS DBT FROM 
+(
+  SELECT * , COALESCE(LAG(e.salary) OVER(ORDER BY e.emp_id) , 0) PES 
+  FROM employees AS e
+) AS t
 
 SELECT 
   emp_id,
@@ -216,6 +219,22 @@ ORDER BY user_id , start_date
 -- department name
 -- salary
 
+SELECT * FROM 
+(
+  SELECT e.name , d.dept_name , e.salary , DENSE_RANK() OVER(
+    PARTITION BY d.dept_id ORDER BY e.salary DESC
+  ) as salary_rank FROM employees e JOIN departments d ON e.dept_id = d.dept_id
+) as T WHERE salary_rank <= 2;
+
+
+
+
+
+
+
+
+
+
 SELECT 
   name,
   dept_name,
@@ -250,6 +269,9 @@ WHERE rnk <= 2;
 -- 🎯 Task
 
 -- Get top 2 highest paid ACTIVE employees per department
+
+
+
 
 SELECT 
 emp_id , dept_id , salary , status 
