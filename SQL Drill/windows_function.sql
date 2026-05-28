@@ -34,6 +34,15 @@ SELECT  fname , lname , dept , salary, COALESCE(salary - LEAD(salary) OVER(ORDER
      -- Window Function Pattern 1 :- 🔥 PATTERN 1: Top N per Group (MOST IMPORTANT)
         --🧠 Problem :- “Get top 3 highest paid employees per department”
 
+SELECT * FROM 
+(
+  SELECT *, DENSE_RANK() OVER(PARTITION BY e.dept ORDER BY e.salary DESC) AS rnk
+  FROM employees as e
+)
+as t 
+where t.rnk <= 3;
+
+
 		SELECT * FROM 
 		(
           SELECT *, DENSE_RANK() 
@@ -66,6 +75,17 @@ SELECT  fname , lname , dept , salary, COALESCE(salary - LEAD(salary) OVER(ORDER
 -- You must keep the most recent one
 -- No data loss except duplicates
 
+
+SELECT * FROM 
+(
+  SELECT * , 
+  ROW_NUMBER() OVER(PARTITION by u.email ORDER BY u.created_at DESC) as unique_email
+  FROM users AS u
+) as t
+WHERE unique_email = 1;
+
+
+
 SELECT * FROM (
     SELECT * , ROW_NUMBER() OVER(PARTITION BY EMAIL ORDER BY created_at DESC) AS unique_email FROM users
 ) AS t WHERE unique_email = 1;
@@ -90,6 +110,14 @@ SELECT * FROM (
 -- Running total = cumulative sum
 -- Ordered by date
 -- Each row should include sum of all previous + current
+
+
+
+
+
+
+
+
 
 SELECT 
   order_id,
