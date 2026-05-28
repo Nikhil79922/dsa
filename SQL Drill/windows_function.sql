@@ -270,7 +270,11 @@ WHERE rnk <= 2;
 
 -- Get top 2 highest paid ACTIVE employees per department
 
-
+SELECT * FROM 
+(
+SELECT * , DENSE_RANK() OVER(PARTITION BY e.dept_id ORDER BY e.salary DESC) as sal_rnk 
+FROM employees AS e WHERE e.status = 'active'
+) as T WHERE T.sal_rnk <=2;
 
 
 SELECT 
@@ -348,6 +352,11 @@ GROUP BY user_id;
 -- 🎯 Task
 
 -- For each user, return the date of their 3rd order
+
+SELECT * FROM 
+(
+  SELECT * , ROW_NUMBER() OVER(PARTITION BY o.user_id ORDER BY o.order_date ) as ord_dates FROM orders AS o 
+) as T WHERE T.ord_dates = 3;
 
 SELECT 
 user_id,
