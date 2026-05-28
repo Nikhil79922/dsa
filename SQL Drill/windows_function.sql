@@ -183,6 +183,26 @@ FROM (
 -- start_date
 -- end_date
 
+
+
+SELECT T.user_id , MIN(T.login_date) AS start_date, MAX(T.login_date) AS end_date FROM 
+(
+SELECT * , login_date - INTERVAL '1 day' * ROW_NUMBER() 
+OVER(PARTITION BY l.user_id ORDER  BY l.login_date) as grp 
+FROM logins AS l
+) as T GROUP BY T.user_id , T.grp
+ORDER BY start_date;
+;
+
+
+
+
+
+
+
+
+
+
 SELECT user_id , MIN(login_date) AS start_date , MAX(login_date) AS end_date FROM (
     SELECT 
     user_id,
