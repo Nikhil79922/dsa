@@ -286,3 +286,43 @@ var isValid=(nums , mid , C )=>{
 }
 
 console.log("Max distance for the minimum cow distance placement",cowDistance([0,3,4,7,10,9],4));
+
+
+class Solution {
+	findPages(arr, k) {
+	let n = arr.length;
+	if(k > n) return -1;
+	let low = Math.max(...arr);
+	let high = arr.reduce((sum,item)=> sum+item , 0)
+	
+	while(low<=high){
+	    let mid=Math.floor((low+high)/2);
+	    let students=this.countStudent(arr,mid , k);
+	    if(students > k){
+	        low= mid+1;
+	    }else{
+	        high = mid-1;
+	    }
+	}
+	return low;
+		
+	}
+	
+	countStudent(arr, mid , k){
+	 let students = 1 ;
+	 let lastCount = 0 ;
+	 for(let i = 0 ; i< arr.length ; i++){
+	     if((arr[i] + lastCount ) <= mid){
+	         lastCount += arr[i];
+	     }else{
+	         students++;
+	         lastCount = arr[i];
+	     }
+	     
+	     if(students > k){
+	         return students
+	     }
+	 }
+	 return students;
+	}
+}
