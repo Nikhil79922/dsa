@@ -196,13 +196,6 @@ ORDER BY start_date;
 
 
 
-
-
-
-
-
-
-
 SELECT user_id , MIN(login_date) AS start_date , MAX(login_date) AS end_date FROM (
     SELECT 
     user_id,
@@ -326,12 +319,44 @@ WHERE rnk <= 2;
 
 -- user_id
 -- streak_length (max consecutive days)
+
 -- 🧠 Example
 -- user_id	txn_date
 -- 1	2024-01-01
 -- 1	2024-01-02
 -- 1	2024-01-03
 -- 1	2024-01-05
+
+
+SELECT 
+trs.user_id,
+COUNT(trs.txn_date) AS streak_length
+FROM 
+(
+  SELECT t.* , t.txn_date - INTERVAL '1 day' * ROW_NUMBER()
+  OVER(PARTITION BY t.user_id ORDER BY t.txn_date) AS grp 
+  FROM transaction AS t 
+) as trs 
+GROUP BY trs.user_id , trs.grp
+ORDER BY trs.user_id , trs.txn_date
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 SELECT 
