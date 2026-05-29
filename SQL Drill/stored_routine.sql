@@ -1,7 +1,5 @@
 SELECT * FROM employees ;
 
- 
-
 CREATE PROCEDURE insert_new_emp (
    pFname VARCHAR(200),
    pLname VARCHAR(200),
