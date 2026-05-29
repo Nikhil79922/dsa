@@ -10,7 +10,7 @@ CREATE PROCEDURE insert_new_emp (
 LANGUAGE plpgsql
 AS $$
 BEGIN 
-INSERT INTO employees (fname , lname , email , dept , salary ) VALUES (
+INSERT INTO employees (fname , lname , email , dept , salary) VALUES (
 pFname,
 pLname,
 pEmail,
