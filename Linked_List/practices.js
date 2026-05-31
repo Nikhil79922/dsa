@@ -98,3 +98,38 @@ var mergeTwoLists = function (list1, list2) {
     }
     return dummy
 };
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function (head) {
+    let dummy= structuredClone(head);
+    let current= dummy;
+    let prev= null;
+    while(current != null){
+     let next= current.next;
+     current.next=prev;
+     prev= current;
+     current= next;
+    }
+ 
+    current=head;
+    while(current != null){
+     console.log(current.val,prev.val)
+     if(current.val !== prev.val){
+         return false;
+     }else{
+         current=current.next;
+         prev=prev.next;
+     }
+    }
+    return true;
+ };
