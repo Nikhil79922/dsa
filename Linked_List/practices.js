@@ -191,3 +191,37 @@ var detectCycle = function (head) {
     }
     return null;
 };
+
+
+/**
+ * // Definition for a _Node.
+ * function _Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {_Node} head
+ * @return {_Node}
+ */
+var copyRandomList = function (head) {
+    if (!head) return head;
+    let current = head;
+    let map = structuredClone(head);
+    return map;
+    // while (current !== null) {
+    //     map.set(current, new _Node(current.val, null, null));
+    //     current = current.next;
+    // }
+    // current = head;
+    // while (current !== null) {
+    //     let copy = map.get(current);
+    //     copy.next = map.get(current.next) || null;
+    //     copy.random = map.get(current.random) || null;
+    //     current = current.next;
+    // }
+    // return map.get(head);
+
+};
