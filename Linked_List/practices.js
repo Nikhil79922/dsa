@@ -226,8 +226,6 @@ var copyRandomList = function (head) {
 
 };
 
-
-
 // Flattern singly listed list 
 var flatten = function(head) {
     if (head === null || head.next === null) {
@@ -260,3 +258,49 @@ var merge = function(l1, l2) {
 
     return dummy.child;
 };
+
+
+/**
+ * // Definition for a _Node.
+ * function _Node(val,prev,next,child) {
+ *    this.val = val;
+ *    this.prev = prev;
+ *    this.next = next;
+ *    this.child = child;
+ * };
+ */
+
+/**
+ * @param {_Node} head
+ * @return {_Node}
+ */
+var flatten = function (head) {
+    if (head == null) return head;
+     dfs(head);
+    return head;
+};
+
+var dfs = function (head) {
+    let curr = head;
+
+
+    while (curr != null) {
+        let next = curr.next;
+        if (curr.child) {
+            let childHead = curr.child
+             let childTail =  dfs(curr.child);
+            curr.next = childHead;
+            childHead.prev = curr;
+            curr.child = null;
+            if (next) {
+                childTail.next = next;
+                next.prev = childTail;
+            }
+        }
+        if(curr.next == null){
+            break;
+        }
+        curr = curr.next;
+    }
+    return curr;
+}
