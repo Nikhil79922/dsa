@@ -225,3 +225,38 @@ var copyRandomList = function (head) {
     // return map.get(head);
 
 };
+
+
+
+// Flattern singly listed list 
+var flatten = function(head) {
+    if (head === null || head.next === null) {
+        return head;
+    }
+
+    head.next = flatten(head.next);
+
+    return merge(head, head.next);
+};
+
+var merge = function(l1, l2) {
+    let dummy = new _Node(-1);
+    let curr = dummy;
+
+    while (l1 && l2) {
+        if (l1.val < l2.val) {
+            curr.child = l1;
+            l1 = l1.child;
+        } else {
+            curr.child = l2;
+            l2 = l2.child;
+        }
+
+        curr = curr.child;
+        curr.next = null;
+    }
+
+    curr.child = l1 ? l1 : l2;
+
+    return dummy.child;
+};
