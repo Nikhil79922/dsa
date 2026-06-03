@@ -371,3 +371,37 @@ var addTwoNumbers = function (l1, l2) {
     }
     return dummy.next;
 };
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var rotateRight = function(head, k) {
+    if(head == null || head.next == null || k==0) return head 
+    let size = 1;
+    let tail = head
+    while(tail.next != null){
+        size ++;
+        tail=tail.next
+    }
+    k %=size;
+        if (k === 0) return head;
+     tail.next=head;
+        let steps = size - k;
+        let newTail=head;
+        for(let i=1; i<steps ; i++){
+    newTail=newTail.next
+        }
+        let newHead = newTail.next;
+        newTail.next= null;
+        return newHead;
+    };
