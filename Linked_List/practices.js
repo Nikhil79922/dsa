@@ -405,3 +405,61 @@ var rotateRight = function (head, k) {
     newTail.next = null;
     return newHead;
 };
+
+
+
+var reverseBetween = function (head, left, right) {
+    if (left == right || head == null) return head;
+    let dummy = new ListNode(0);
+    dummy.next = head
+    let beforeLeft = dummy;
+    for (let i = 1; i < left; i++) {
+        beforeLeft = beforeLeft.next;
+    }
+    let curr = beforeLeft.next;
+    let prev = null;
+    for (let i = 0; i <= right - left; i++) {
+        let next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    let leftNode = beforeLeft.next;
+    beforeLeft.next = prev;
+    leftNode.next = curr
+
+    return dummy.next;
+};
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} left
+ * @param {number} right
+ * @return {ListNode}
+ */
+var reverseBetween = function (head, left, right) {
+    if (left == right || head == null) return head;
+    let dummy = new ListNode(0);
+    dummy.next = head
+    let beforeLeft = dummy;
+    for (let i = 1; i < left; i++) {
+        beforeLeft = beforeLeft.next;
+    }   
+    let curr = beforeLeft.next;
+    for (let i = 1; i <= right - left; i++) {
+        let next= curr.next;
+         curr.next= next.next;
+         next.next=beforeLeft.next
+         beforeLeft.next= next;
+    }
+
+    return dummy.next;
+};
