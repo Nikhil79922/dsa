@@ -9,19 +9,19 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
-    let prev=null
-    let current=head;
-    
-    while(current !== null){
-        let next=current.next;
-        current.next= prev;
-        prev= current;
-        current=next;
+var reverseList = function (head) {
+    let prev = null
+    let current = head;
+
+    while (current !== null) {
+        let next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
     }
     return prev;
-    };
-    
+};
+
 
 
 /**
@@ -37,10 +37,10 @@ var reverseList = function(head) {
  */
 var middleNode = function (head) {
     let slow = head;
-    let fast =head;
+    let fast = head;
     while (fast && fast.next) {
-   slow= slow.next;
-   fast = fast.next.next;
+        slow = slow.next;
+        fast = fast.next.next;
     }
     return slow
 };
@@ -85,7 +85,7 @@ var mergeTwoLists = function (list1, list2) {
         if (list2 == null) {
             setDummy(list1.val)
             list1 = list1.next;
-              continue;
+            continue;
         }
 
         if (list1.val > list2.val) {
@@ -111,64 +111,64 @@ var mergeTwoLists = function (list1, list2) {
  * @return {boolean}
  */
 var isPalindrome = function (head) {
-    let dummy= structuredClone(head);
-    let current= dummy;
-    let prev= null;
-    while(current != null){
-     let next= current.next;
-     current.next=prev;
-     prev= current;
-     current= next;
+    let dummy = structuredClone(head);
+    let current = dummy;
+    let prev = null;
+    while (current != null) {
+        let next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
     }
- 
-    current=head;
-    while(current != null){
-     console.log(current.val,prev.val)
-     if(current.val !== prev.val){
-         return false;
-     }else{
-         current=current.next;
-         prev=prev.next;
-     }
+
+    current = head;
+    while (current != null) {
+        console.log(current.val, prev.val)
+        if (current.val !== prev.val) {
+            return false;
+        } else {
+            current = current.next;
+            prev = prev.next;
+        }
     }
     return true;
- };
+};
 
 
- /**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+/**
+* Definition for singly-linked list.
+* function ListNode(val) {
+*     this.val = val;
+*     this.next = null;
+* }
+*/
 
 /**
  * @param {ListNode} head
  * @return {boolean}
  */
-var hasCycle = function(head) {
-    let slow=head;
-    let fast=head;
-  
-  while(fast && fast.next){
-      fast= fast.next.next;
-      if(fast == slow){
-          return true;
-      }
-      slow= slow.next;
-  }
-  return false;
-  };
+var hasCycle = function (head) {
+    let slow = head;
+    let fast = head;
+
+    while (fast && fast.next) {
+        fast = fast.next.next;
+        if (fast == slow) {
+            return true;
+        }
+        slow = slow.next;
+    }
+    return false;
+};
 
 
-  /**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+/**
+* Definition for singly-linked list.
+* function ListNode(val) {
+*     this.val = val;
+*     this.next = null;
+* }
+*/
 
 /**
  * @param {ListNode} head
@@ -227,7 +227,7 @@ var copyRandomList = function (head) {
 };
 
 // Flattern singly listed list 
-var flatten = function(head) {
+var flatten = function (head) {
     if (head === null || head.next === null) {
         return head;
     }
@@ -237,7 +237,7 @@ var flatten = function(head) {
     return merge(head, head.next);
 };
 
-var merge = function(l1, l2) {
+var merge = function (l1, l2) {
     let dummy = new _Node(-1);
     let curr = dummy;
 
@@ -276,7 +276,7 @@ var merge = function(l1, l2) {
  */
 var flatten = function (head) {
     if (head == null) return head;
-     dfs(head);
+    dfs(head);
     return head;
 };
 
@@ -288,7 +288,7 @@ var dfs = function (head) {
         let next = curr.next;
         if (curr.child) {
             let childHead = curr.child
-             let childTail =  dfs(curr.child);
+            let childTail = dfs(curr.child);
             curr.next = childHead;
             childHead.prev = curr;
             curr.child = null;
@@ -297,7 +297,7 @@ var dfs = function (head) {
                 next.prev = childTail;
             }
         }
-        if(curr.next == null){
+        if (curr.next == null) {
             break;
         }
         curr = curr.next;
@@ -333,7 +333,7 @@ var addTwoNumbers = function (l1, l2) {
         } else {
             current.next = new ListNode(add);
             current = current.next;
-            sum=0
+            sum = 0
         }
         h1 = h1.next;
         h2 = h2.next;
@@ -347,7 +347,7 @@ var addTwoNumbers = function (l1, l2) {
         } else {
             current.next = new ListNode((add % 10));
             current = current.next;
-                        sum=0
+            sum = 0
         }
         h1 = h1.next;
     }
@@ -360,7 +360,7 @@ var addTwoNumbers = function (l1, l2) {
         } else {
             current.next = new ListNode((add % 10));
             current = current.next;
-                        sum=0
+            sum = 0
         }
         h2 = h2.next;
     }
@@ -385,23 +385,23 @@ var addTwoNumbers = function (l1, l2) {
  * @param {number} k
  * @return {ListNode}
  */
-var rotateRight = function(head, k) {
-    if(head == null || head.next == null || k==0) return head 
+var rotateRight = function (head, k) {
+    if (head == null || head.next == null || k == 0) return head
     let size = 1;
     let tail = head
-    while(tail.next != null){
-        size ++;
-        tail=tail.next
+    while (tail.next != null) {
+        size++;
+        tail = tail.next
     }
-    k %=size;
-        if (k === 0) return head;
-     tail.next=head;
-        let steps = size - k;
-        let newTail=head;
-        for(let i=1; i<steps ; i++){
-    newTail=newTail.next
-        }
-        let newHead = newTail.next;
-        newTail.next= null;
-        return newHead;
-    };
+    k %= size;
+    if (k === 0) return head;
+    tail.next = head;
+    let steps = size - k;
+    let newTail = head;
+    for (let i = 1; i < steps; i++) {
+        newTail = newTail.next
+    }
+    let newHead = newTail.next;
+    newTail.next = null;
+    return newHead;
+};
