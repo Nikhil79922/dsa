@@ -463,3 +463,42 @@ var reverseBetween = function (head, left, right) {
 
     return dummy.next;
 };
+
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+    let temp = head;
+    let count =0 ;
+ 
+    //if it return head , then that means k group does not exists 
+    while(count < k){
+     if(temp == null) return head;
+     temp=temp.next;
+     count ++;
+    }
+ 
+ //CHeck all the group and return the prevNode to connect with new reverse groups;
+    let prevNode = reverseKGroup(temp , k)
+    temp = head;
+    count = 0 ;
+    while(count < k){
+     let next = temp.next;
+     temp.next= prevNode;
+     prevNode = temp
+     temp=next;
+     count++
+    }
+    return prevNode;
+ };
