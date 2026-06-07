@@ -55,3 +55,23 @@ MyStack.prototype.empty = function() {
  * var param_3 = obj.top()
  * var param_4 = obj.empty()
  */
+
+
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function (nums1, nums2) {
+    let stack = [];
+    let map = new Map();
+    for (let i = nums2.length - 1; i >= 0; i--) {
+        while (stack.length && nums2[stack[stack.length - 1]] <= nums2[i]) {
+            stack.pop();
+        }
+        map.set(nums2[i], stack.length ? nums2[stack[stack.length - 1]] : -1);
+        stack.push(i)
+    }
+
+    return nums1.map(num => map.get(num));
+};
