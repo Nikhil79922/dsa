@@ -130,3 +130,27 @@ var firstUniqChar = function(s) {
     }
     return -1;
 };
+
+
+class Solution {
+	reverseFirstK(q, k) {
+		let stack = [];
+		let stack2 = [];
+		let index = 0
+		if (k > q.length) return q
+		while (q.length && index !== k) {
+			index++;
+			stack.push(q.shift());
+		}
+		
+		while (stack.length !== 0) {
+			let val = stack.pop();
+			stack2.push(val);
+		}
+		
+		return [...stack2,...q];
+	}
+}   
+
+const sol = new Solution();
+console.log("checl===>",sol.reverseFirstK([7 ,7, 5, 6, 5, 10],4))
