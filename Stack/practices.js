@@ -153,4 +153,34 @@ class Solution {
 }   
 
 const sol = new Solution();
-console.log("checl===>",sol.reverseFirstK([7 ,7, 5, 6, 5, 10],4))
+console.log("check===>",sol.reverseFirstK([7 ,7, 5, 6, 5, 10],4))
+
+/**
+ * @param {number[]} tickets
+ * @param {number} k
+ * @return {number}
+ */
+var timeRequiredToBuy = function(tickets, k) {
+    let q = [];
+
+    for (let i = 0; i < tickets.length; i++) {
+        q.push([tickets[i], i]);
+    }
+
+    let time = 0;
+
+    while (q.length) {
+        let [count, idx] = q.shift();
+
+        count--;
+        time++;
+
+        if (count === 0 && idx === k) {
+            return time;
+        }
+
+        if (count > 0) {
+            q.push([count, idx]);
+        }
+    }
+};
