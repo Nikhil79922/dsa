@@ -503,3 +503,88 @@ var reverseKGroup = function(head, k) {
     return prevNode;
  };
  
+
+ /**
+ * @param {number} capacity
+ */
+
+class NodeList {
+    constructor(key, val, prev, next) {
+        this.key = key;
+        this.val = val;
+        this.prev = prev || null;
+        this.next = next || null;
+    }
+}
+var LRUCache = function (capacity) {
+    this.size = capacity;
+    this.head = new NodeList(-1, -1);
+    this.tail = new NodeList(-1, -1);
+    this.tail.prev = this.head;
+    this.head.next = this.tail;
+
+    this.map = new Map();
+};
+
+
+
+LRUCache.prototype.addNode = function (newNode) {
+    let next = this.head.next;
+    this.head.next = newNode;
+    newNode.prev = this.head;
+    newNode.next = next;
+    next.prev = newNode;
+}
+
+LRUCache.prototype.deleteNode = function(node) {
+    let prev = node.prev;
+    let next = node.next;
+    prev.next = next;
+    next.prev = prev;
+}
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function (key) {
+    if (this.map.has(key)) {
+        let node = this.map.get(key);
+        let value = node.val;
+        this.map.delete(key)
+        this.deleteNode(node);
+        let newNode = new NodeList(key, value);
+        this.map.set(key, newNode);
+        this.addNode(newNode);
+        return value;
+    }
+    return -1;
+};
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function (key, value) {
+    if (this.map.has(key)) {
+        let node = this.map.get(key);
+        this.map.delete(key)
+        this.deleteNode(node);
+    }
+    else if (this.size == this.map.size){
+let lastNode = this.tail.prev;
+        this.map.delete(lastNode.key)
+        this.deleteNode(lastNode);
+    }
+     let newNode = new NodeList(key, value);
+        this.map.set(key, newNode);
+        this.addNode(newNode);
+};
+
+/** 
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
