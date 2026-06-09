@@ -253,51 +253,104 @@ console.log(
 );
 
 
-
-
-
-
-
-
-
-// Understanding 
 /**
  * @param {number[]} nums
  * @return {number}
  */
 var maxSumMinProduct = function (nums) {
   let n = nums.length;
-  let prefix = new Array(n);
-  let leftMin = new Array(n).fill(-1);
-  let stack = [];
-  let rightMin = new Array(n).fill(n);
+  let stack1 = [];
   let stack2 = [];
-
+  let prefixSum = [];
+  let leftMin = new Array(n).fill(-1);
+  let rightMin = new Array(n).fill(n);
   for (let i = 0; i < n; i++) {
-      prefix[i] = i === 0 ? nums[i] : prefix[i - 1] + nums[i];
-      while (stack.length && nums[stack[stack.length - 1]] >= nums[i]) {
-          stack.pop();
+      prefixSum[i] = i == 0 ? nums[i] : prefixSum[i - 1] + nums[i];
+      while (stack1.length && nums[stack1[stack1.length - 1]] >= nums[i]) {
+          stack1.pop();
       }
-      leftMin[i] = stack.length ? stack[stack.length - 1] : -1;
-      stack.push(i);
-
+      leftMin[i] = stack1.length !== 0 ? stack1[stack1.length - 1] : -1;
+      stack1.push(i);
       while (stack2.length && nums[stack2[stack2.length - 1]] > nums[i]) {
           let idx = stack2.pop();
-          rightMin[idx] = i
+          rightMin[idx] = i;
       }
-      stack2.push(i)
+      stack2.push(i);
   }
 
-  let max = 0n; 
-
+  let max = 0n;
   for (let i = 0; i < n; i++) {
       let left = leftMin[i] + 1;
       let right = rightMin[i] - 1;
-
-      let total = BigInt(prefix[right]) - BigInt(left > 0 ? prefix[left - 1] : 0);
+      let total = BigInt(prefixSum[right]) - BigInt(left > 0 ? prefixSum[left - 1] : 0)
       let curr = total * BigInt(nums[i]);
-
-      if (curr > max) max = curr;
+      max = curr > max ? curr : max;
   }
-  return Number(max % 1000000007n);
+  const MOD = 1000000007n;
+  return Number(max % MOD);
+
 };
+
+
+
+
+var MinStack = function() {
+  this.stack1=[];
+  this.stack2=[];
+  };
+  
+  /** 
+   * @param {number} val
+   * @return {void}
+   */
+  MinStack.prototype.push = function(val) {
+     this.stack1.push(val);
+     if(this.stack2.length == 0){
+      this.stack2.push(val);
+     }else{
+     if(this.stack2[this.stack2.length -1] >= val){
+      this.stack2.push(val);
+     }
+     }
+  };
+  
+  /**
+   * @return {void}
+   */
+  MinStack.prototype.pop = function() {
+    if(this.stack1.length){
+      var val = this.stack1.pop();
+    }
+    if(val == this.stack2[this.stack2.length -1] ){
+      this.stack2.pop();
+    }
+  };
+  
+  /**
+   * @return {number}
+   */
+  MinStack.prototype.top = function() {
+  if(this.stack1.length){
+     return this.stack1[this.stack1.length -1];
+    }
+    return null;
+  };
+  
+  /**
+   * @return {number}
+   */
+  MinStack.prototype.getMin = function() {
+      if(this.stack2.length){
+     return this.stack2[this.stack2.length -1];
+    }
+    return null;
+  };
+  
+  /** 
+   * Your MinStack object will be instantiated and called as such:
+   * var obj = new MinStack()
+   * obj.push(val)
+   * obj.pop()
+   * var param_3 = obj.top()
+   * var param_4 = obj.getMin()
+   */
