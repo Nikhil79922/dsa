@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution {
     public long maxSum(int[] nums, int k, int mul) {
         if(k <= 0 ) return 0;
@@ -23,4 +25,4 @@ class Solution {
         }
         return ans;
     }
-}©leetcode
+}
